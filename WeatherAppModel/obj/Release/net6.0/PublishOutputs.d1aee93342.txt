@@ -1,0 +1,5 @@
+D:\C#\Git\WeatherApp\WeatherApp\bin\Release\net6.0\publish\WeatherApp.exe
+D:\C#\Git\WeatherApp\WeatherApp\bin\Release\net6.0\publish\WeatherApp.dll
+D:\C#\Git\WeatherApp\WeatherApp\bin\Release\net6.0\publish\WeatherApp.deps.json
+D:\C#\Git\WeatherApp\WeatherApp\bin\Release\net6.0\publish\WeatherApp.runtimeconfig.json
+D:\C#\Git\WeatherApp\WeatherApp\bin\Release\net6.0\publish\WeatherApp.pdb
