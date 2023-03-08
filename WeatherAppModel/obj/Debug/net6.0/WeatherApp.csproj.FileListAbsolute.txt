@@ -15,3 +15,15 @@ D:\C#\Git\WeatherApp\WeatherApp\obj\Debug\net6.0\WeatherApp.genruntimeconfig.cac
 D:\C#\Git\WeatherApp\WeatherApp\obj\Debug\net6.0\ref\WeatherApp.dll
 D:\C#\Git\WeatherApp\WeatherApp\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\C#\Git\WeatherApp\WeatherApp\obj\Debug\net6.0\WeatherApp.csproj.CopyComplete
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.csproj.AssemblyReference.cache
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.AssemblyInfoInputs.cache
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.AssemblyInfo.cs
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.csproj.CoreCompileInputs.cache
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.dll
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\refint\WeatherApp.dll
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\WeatherApp.pdb
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\bin\Debug\net6.0\WeatherApp.deps.json
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\bin\Debug\net6.0\WeatherApp.dll
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\bin\Debug\net6.0\WeatherApp.pdb
+D:\C#\Git\WeatherApp-ASP.NET\WeatherAppModel\obj\Debug\net6.0\ref\WeatherApp.dll

@@ -66,6 +66,63 @@ namespace WeatherApp
                              
 
         }
+        public async Task<RootWeather> GetWeatherDataFromServerAsync(RootBasicCityInfo cityInfo)
+        {
+            string receivedWeatherForCurrentCity;
+            StringBuilder fullUrlToRequest = new StringBuilder();
+            try
+            {
+                string apiKey = apiManager.GetTheFirstKey();
+
+                fullUrlToRequest.AppendFormat(textMessages.GetWeatherUrl, cityInfo.Key, apiKey);
+
+                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(fullUrlToRequest.ToString());
+
+                return JsonSerializer.Deserialize<RootWeather>(receivedWeatherForCurrentCity);
+            }
+            catch (ArgumentNullException ex)
+            {
+                textWorker.ShowTheText(ex.Message);
+                throw ex;
+            }
+            catch (NullReferenceException ex)
+            {
+                textWorker.ShowTheText(textMessages.ApiIsEmpty);
+                textWorker.ShowTheText(ex.Message);
+                throw ex;
+            }
+            catch (AggregateException ex)
+            {
+                textWorker.ShowTheText(textMessages.NetworkOrHostIsNotAwailable);
+                textWorker.ShowTheText(ex.Message);
+                throw ex;
+            }
+            catch (JsonException ex)
+            {
+                textWorker.ShowTheText(textMessages.ReceiveWeatherError);
+                textWorker.ShowTheText(ex.Message);
+                throw ex;
+            }
+            
+        }
+        public async Task<List<string>> GetPrepareWeather(RootBasicCityInfo cityInfo)
+        {
+            var tempWeather = await GetWeatherDataFromServerAsync(cityInfo);
+            var list = new List<string>();
+            
+            foreach (var item in tempWeather.DailyForecasts)
+            {
+                list.Add(string.Format(textMessages.PatternOfWeather, item.Date, 
+                                                                      item.Temperature.Minimum.Value,
+                                                                      item.Temperature.Maximum.Value, 
+                                                                      item.Day.IconPhrase, 
+                                                                      item.Night.IconPhrase, 
+                                                                      cityInfo.LocalizedName));
+                
+
+            }
+            return list;
+        }
         
     }
 }

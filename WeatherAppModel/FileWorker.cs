@@ -51,10 +51,10 @@ namespace WeatherApp
         /// </summary>
         /// <param name="currList"></param>
         /// <param name="fileName"></param>
-        public void WriteFileToLocalStorage(List<T> currList, string fileName)
+        public async Task WriteFileToLocalStorageAsync(List<T> currList, string fileName)
         {
             FileInfo fileInfo = new FileInfo(fileName);
-            using FileStream fs = fileInfo.OpenWrite();
+            await using FileStream fs = fileInfo.OpenWrite();
             JsonSerializer.Serialize(fs, currList);
         }        
 

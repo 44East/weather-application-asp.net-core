@@ -10,4 +10,10 @@
     <ProjectReference Include="..\WeatherAppModel\WeatherApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="WeatherApp">
+      <HintPath>..\WeatherAppModel\bin\Debug\net6.0\WeatherApp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

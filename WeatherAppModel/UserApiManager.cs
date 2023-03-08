@@ -25,7 +25,7 @@ namespace WeatherApp
         /// Метод записывает API ключи в файл.
         /// </summary>
         /// <param name="formalUserAPi"></param>
-        public void WriteUserApiToLocalStorage(string formalUserAPi)
+        public async Task WriteUserApiToLocalStorageAsync(string formalUserAPi)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace WeatherApp
                     throw new NullReferenceException(textMessages.IncorrectInput);
 
                 UserApiList.Add(new UserApi(formalUserAPi));
-                fileWorker.WriteFileToLocalStorage(UserApiList, textMessages.ApiKeysFileName);
+                await fileWorker.WriteFileToLocalStorageAsync(UserApiList, textMessages.ApiKeysFileName);
             }
             catch(NullReferenceException ex)
             { 
@@ -78,7 +78,7 @@ namespace WeatherApp
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                textWorker.ShowTheText(ex.Message);
             }
         }
         

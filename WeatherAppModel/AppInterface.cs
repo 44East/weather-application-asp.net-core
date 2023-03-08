@@ -34,25 +34,56 @@ namespace WeatherApp
         }
         private void InitializeUserFiles()
         {
-            ApiManager.ReadUserApiFromLocalStorage();
-            DataRepo.ReadListOfCityMonitoring();
+           ApiManager.ReadUserApiFromLocalStorage();
+           DataRepo.ReadListOfCityMonitoring();
         }
-        public List<RootBasicCityInfo> GetSavedCity()
-        {
-            var currentCities = DataRepo.ListOfCitiesForMonitoringWeather;
-            return currentCities;
-        }
-        public void AddUserApi(string api)
+        public async Task AddUserApiAsync(string api)
         {
             if (string.IsNullOrEmpty(api))
             { return; }
 
-            ApiManager.WriteUserApiToLocalStorage(api.Trim());
+            await ApiManager.WriteUserApiToLocalStorageAsync(api.Trim());
+            
 
         }
-        public async Task<List<RootBasicCityInfo>> FindCityAsync(string cityName, string searchLanguage)
+        #region Weather
+        public async Task<RootWeather> GetWeatherForCityAsync(RootBasicCityInfo cityInfo)
         {
-            return await SearcherCity.GettingListOfCitesOnRequestAsync(cityName, searchLanguage);
+            return await ReceiverWeather.GetWeatherDataFromServerAsync(cityInfo);
         }
+        public async Task<List<string>> GetPrepareWeatherAsync(RootBasicCityInfo cityInfo)
+        {
+            return await ReceiverWeather.GetPrepareWeather(cityInfo);
+        }
+        #endregion
+
+        #region City
+        public async Task<IEnumerable<RootBasicCityInfo>> FindCityAsync(string cityName, string searchLanguage)
+        {
+            return await SearcherCity.GetListOfCitesOnRequestAsync(cityName, searchLanguage);
+        }
+        public async Task SaveCityAsync(RootBasicCityInfo cityInfo)
+        {
+            await DataRepo.AddCityInSavedListAsync(cityInfo);
+        }
+        public async Task RemoveCityAsync(RootBasicCityInfo cityInfo)
+        {
+            await DataRepo.RemoveCityFromSavedListAsync(cityInfo);
+        }
+        public IEnumerable<RootBasicCityInfo> GetSavedCity()
+        {
+            var currentCities = DataRepo.ListOfCitiesForMonitoringWeather;
+            return currentCities;
+        }
+        public IEnumerable<string> GetPreparedSavedCity()
+        {
+            return DataRepo.GetPreparedListOfSavedCity();
+        }
+        public Task<IEnumerable<string>> GetPreparedCitiesListFromSearchAsync(string cityName, string searchLanguage)
+        {
+            return SearcherCity.GetPreparedListOfCityFromServerAsync(cityName, searchLanguage);
+        }
+
+        #endregion
     }
 }

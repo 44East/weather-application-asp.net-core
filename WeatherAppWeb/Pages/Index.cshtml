@@ -3,8 +3,11 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<h1>Cities</h1>
+<dl class="dl-horizontal">
+        @foreach (var item in Model.Cities)
+        {
+            <dd>@item</dd>
+        }
+</dl>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>

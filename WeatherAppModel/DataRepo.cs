@@ -7,7 +7,7 @@ namespace WeatherApp
         private TextMessages textMessages;
         private TextWorker textWorker;
         private FileWorker<RootBasicCityInfo> fileWorker;
-        public DataRepo(TextMessages textMessages,TextWorker textWorker)
+        public DataRepo(TextMessages textMessages, TextWorker textWorker)
         {
             fileWorker = new FileWorker<RootBasicCityInfo>();
             ListOfCitiesForMonitoringWeather = new List<RootBasicCityInfo>();
@@ -17,48 +17,48 @@ namespace WeatherApp
         /// <summary>
         /// Временно хранит прочитанные города из файла с локального диска, для дальнейшего вывода по ним погоды. 
         /// </summary>
-        public List<RootBasicCityInfo> ListOfCitiesForMonitoringWeather { get; private set; }   
+        public List<RootBasicCityInfo> ListOfCitiesForMonitoringWeather { get; private set; }
         /// <summary>
         /// При запуске читает локальнй файл сохраненных городов и записывает их в коллекцию, если файл еще не создан или
         /// удален/перемещен, то экземпляр файлового обработчика создает пустой файл и пробрасывает соответствующее исключение.
         /// </summary>
         public void ReadListOfCityMonitoring()
-        {   
+        {
             try
             {
                 ListOfCitiesForMonitoringWeather = fileWorker.ReadFileFromLocalDisk(textMessages.CityFileName);
             }
-            catch(JsonException ex)
+            catch (JsonException ex)
             {
                 textWorker.ShowTheText(textMessages.CityFileFailure);
             }
-            catch(FileNotFoundException ex)
+            catch (FileNotFoundException ex)
             {
                 textWorker.ShowTheText(textMessages.CityFileDoesntExist);
                 textWorker.ShowTheText(ex.Message);
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 textWorker.ShowTheText(ex.Message);
-            }          
-            
-        }        
+            }
+
+        }
         /// <summary>
         /// Записывает в файл все изменения такие как добавление нового города или удаление города из списка.
         /// </summary>
-        private void WriteListOfCityMonitoring()
+        private async Task WriteListOfCityMonitoringAsync()
         {
             try
             {
-                fileWorker.WriteFileToLocalStorage(ListOfCitiesForMonitoringWeather, textMessages.CityFileName);
+                await fileWorker.WriteFileToLocalStorageAsync(ListOfCitiesForMonitoringWeather, textMessages.CityFileName);
             }
-            catch(JsonException ex)
+            catch (JsonException ex)
             {
                 textWorker.ShowTheText(textMessages.CityListWritingFailure);
                 textWorker.ShowTheText(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 textWorker.ShowTheText(ex.Message);
             }
@@ -67,10 +67,10 @@ namespace WeatherApp
         /// Удаляет выбранный пользователем экземпляр города из коллекции и записывает изменения в файл.
         /// </summary>
         /// <param name="rootBasicCityInfo"></param>
-        public void RemoveCityFromSavedList(RootBasicCityInfo rootBasicCityInfo)
-        {   
+        public async Task RemoveCityFromSavedListAsync(RootBasicCityInfo rootBasicCityInfo)
+        {
             ListOfCitiesForMonitoringWeather.Remove(rootBasicCityInfo);
-            WriteListOfCityMonitoring();
+            await WriteListOfCityMonitoringAsync();
         }
         /// <summary>
         /// Принимает временную коллекцию городов которую вернул поиск с сервера, пользователь числовым выбором определяет какой город 
@@ -93,7 +93,7 @@ namespace WeatherApp
                 try
                 {
                     ListOfCitiesForMonitoringWeather.Add(formalListCities[cityNum - 1]);
-                    correctInput= true;
+                    correctInput = true;
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
@@ -101,8 +101,28 @@ namespace WeatherApp
                     textWorker.ShowTheText(ex.Message);
                 }
             }
-            while(!correctInput);
-            WriteListOfCityMonitoring();
+            while (!correctInput);
+            WriteListOfCityMonitoringAsync();
+        }
+        public async Task AddCityInSavedListAsync(RootBasicCityInfo rootBasicCityInfo)
+        {
+            ListOfCitiesForMonitoringWeather.Add(rootBasicCityInfo);
+            await WriteListOfCityMonitoringAsync();
+        }
+        public IEnumerable<string> GetPreparedListOfSavedCity()
+        {
+            var resultList = new List<string>();
+            foreach (var item in ListOfCitiesForMonitoringWeather)
+            {
+                resultList.Add(string.Format(textMessages.PatternOfCity,
+                               ListOfCitiesForMonitoringWeather.IndexOf(item) + 1,
+                               item.EnglishName,
+                               item.LocalizedName,
+                               item.Country.LoacalizedName,
+                               item.AdministrativeArea.LocalizedName,
+                               item.AdministrativeArea.LocalizedType));
+            }
+            return resultList;
         }
     }
 }

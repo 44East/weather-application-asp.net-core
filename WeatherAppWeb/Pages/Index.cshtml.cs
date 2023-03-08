@@ -7,14 +7,19 @@ namespace WeatherAppWeb.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        private  WeatherAppInterfaceModel _weatherModel;
+        public IEnumerable<string> Cities { get; set; } 
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            _weatherModel = new WeatherAppInterfaceModel();
+            Cities = _weatherModel.GetSavedCity();
         }
 
         public void OnGet()
         {
-
+            
+            
         }
     }
 }

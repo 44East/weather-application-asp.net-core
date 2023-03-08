@@ -7,7 +7,7 @@ namespace WeatherApp
     {
 
         private UserApiManager apiManager;
-        private DataRepo DataRepo;
+        private DataRepo dataRepo;
 
         private TextMessages textMessages;
         private TextWorker textWorker;
@@ -17,7 +17,7 @@ namespace WeatherApp
             this.textWorker = textWorker;
 
             this.apiManager = apiManager;
-            DataRepo = dataRepo;            
+            this.dataRepo = dataRepo;
         }
 
         /// <summary>
@@ -27,9 +27,9 @@ namespace WeatherApp
         /// </summary>
         /// <param name="cityName"></param>
         /// <param name="searchLanguage"></param>
-        public async Task<List<RootBasicCityInfo>> GettingListOfCitesOnRequestAsync(string cityName, string searchLanguage)
+        public async Task<List<RootBasicCityInfo>> GetListOfCitesOnRequestAsync(string cityName, string searchLanguage)
         {
-            StringBuilder fullUrlToRequest = new StringBuilder();   
+            StringBuilder fullUrlToRequest = new StringBuilder();
             try
             {
                 string apiKey = apiManager.GetTheFirstKey();
@@ -41,26 +41,45 @@ namespace WeatherApp
                 var rbci = JsonSerializer.Deserialize<List<RootBasicCityInfo>>(prepareString);
                 if (rbci.Count == 0)
                     throw new JsonException(textMessages.SearchError);
-                
+
                 return rbci;
-                
+
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 textWorker.ShowTheText(textMessages.ApiIsEmpty);
                 textWorker.ShowTheText(ex.Message);
+                throw ex;
             }
             catch (AggregateException ex)
             {
                 textWorker.ShowTheText(textMessages.NetworkOrHostIsNotAwailable);
                 textWorker.ShowTheText(ex.Message);
+                throw ex;
             }
             catch (JsonException ex)
             {
                 textWorker.ShowTheText(textMessages.ErorrsBySearch + ex.Message);
+                throw ex;
             }
-            return null;
 
+        }
+        public async Task<IEnumerable<string>> GetPreparedListOfCityFromServerAsync(string cityName, string searchLanguage)
+        {
+            var listResult = new List<string>();
+            var tempCitiesList = await GetListOfCitesOnRequestAsync(cityName, searchLanguage);
+
+            foreach (var item in tempCitiesList)
+            {
+                listResult.Add(string.Format(textMessages.PatternOfCity,
+                               tempCitiesList.IndexOf(item) + 1,
+                               item.EnglishName,
+                               item.LocalizedName,
+                               item.Country.LoacalizedName,
+                               item.AdministrativeArea.LocalizedName,
+                               item.AdministrativeArea.LocalizedType));
+            }
+            return listResult;
         }
         /// <summary>
         /// Удаляет город из списка через экземпляр DataRepo. 
@@ -69,9 +88,9 @@ namespace WeatherApp
         {
             try
             {
-                DataRepo.RemoveCityFromSavedList(GetCurrentCity());
+                dataRepo.RemoveCityFromSavedListAsync(GetCurrentCity());
             }
-            catch(ArgumentNullException ex)
+            catch (ArgumentNullException ex)
             {
                 textWorker.ShowTheText(ex.Message);
             }
@@ -82,10 +101,10 @@ namespace WeatherApp
         /// <returns></returns>
         public RootBasicCityInfo GetCurrentCity()
         {
-            if (DataRepo.ListOfCitiesForMonitoringWeather.Count < 1)
+            if (dataRepo.ListOfCitiesForMonitoringWeather.Count < 1)
                 throw new ArgumentNullException(textMessages.CityListIsEmpty);
 
-            textWorker.ShowSavedCity(DataRepo.ListOfCitiesForMonitoringWeather);
+            textWorker.ShowSavedCity(dataRepo.ListOfCitiesForMonitoringWeather);
             bool isCityNumExist;
 
             int cityNum;
@@ -96,16 +115,16 @@ namespace WeatherApp
                 while (!int.TryParse(Console.ReadLine(), out cityNum))
                 {
                     textWorker.ShowTheText(textMessages.IntParseError + textMessages.GetCityNum);
-                }                
+                }
 
-                if (cityNum < 1 || cityNum > DataRepo.ListOfCitiesForMonitoringWeather.Count)
+                if (cityNum < 1 || cityNum > dataRepo.ListOfCitiesForMonitoringWeather.Count)
                 {
                     textWorker.ShowTheText(textMessages.CityNoExist);
                     isCityNumExist = false;
                 }
             }
             while (!isCityNumExist);
-            return DataRepo.ListOfCitiesForMonitoringWeather[cityNum - 1];
+            return dataRepo.ListOfCitiesForMonitoringWeather[cityNum - 1];
         }
     }
 }
