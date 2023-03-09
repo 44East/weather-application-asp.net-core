@@ -42,8 +42,7 @@ namespace WeatherApp
             if (string.IsNullOrEmpty(api))
             { return; }
 
-            await ApiManager.WriteUserApiToLocalStorageAsync(api.Trim());
-            
+            await ApiManager.WriteUserApiToLocalStorageAsync(api.Trim());            
 
         }
         #region Weather

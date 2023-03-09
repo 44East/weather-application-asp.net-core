@@ -5,20 +5,33 @@ namespace WeatherAppWeb
     public class WeatherAppInterfaceModel
     {
         private readonly AppInterface _interface;
+        private readonly IEnumerable<RootBasicCityInfo> _basicCityInfos;
 
         public WeatherAppInterfaceModel()
         {
             _interface = new AppInterface();
+            _basicCityInfos = _interface.GetSavedCity();
         }
-        public IEnumerable<string> GetSavedCity()
+        public IDictionary<string, string> GetSavedCity()
         {
             var tempList = _interface.GetSavedCity();
-            var result = new List<string>();
-            foreach (var city in tempList) 
+            var dictResult = new Dictionary<string, string>();
+            foreach (var city in tempList)
             {
-                result.Add(city.EnglishName + " " + city.Country.EnglishName + " " + city.Region.EnglishName);
+                if (dictResult.ContainsKey(city.Key))
+                    continue;
+                dictResult.Add(city.Key, city.EnglishName);
             }
-            return result;
+            return dictResult;
+        }
+        public IEnumerable<string> GetWeather(string cityKey)
+        {   
+            RootBasicCityInfo currentCity = (from city 
+                                             in _basicCityInfos 
+                                             where city.Key == cityKey 
+                                             select city).FirstOrDefault();
+            return _interface.GetPrepareWeatherAsync(currentCity).Result;        
+
         }
     }
 }

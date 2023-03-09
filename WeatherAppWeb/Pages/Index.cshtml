@@ -1,13 +1,43 @@
-﻿@page
+﻿@page 
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 <h1>Cities</h1>
-<dl class="dl-horizontal">
-        @foreach (var item in Model.Cities)
-        {
-            <dd>@item</dd>
-        }
-</dl>
+       <ul> 
+           @foreach (var item in Model.Cities)
+           {
+            <li>@item.Value</li>
+           }
+       </ul>
+
+@*<h1>Click Submit to send the model</h1>
+<form method="post">
+    <div class="form-group">        
+        <label asp-for="Cities"></label>
+        <input class="form-control" asp-page="Index"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>*@
+
+<form method="post" >
+    <input type="text" name="cityName" />
+    <input type="submit" value="Отправить" />
+</form>
+
+<h1>Weather:</h1>
+    <form method="post">
+       <ul> 
+           @{
+              int i = 0;
+           } 
+           @foreach (var item in Model.Weather)
+           {            
+            i++;            
+            <h4>"Day @i"</h4><dd>@item</dd>
+           }
+        
+       </ul>
+    </form>
+
 
