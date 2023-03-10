@@ -15,12 +15,12 @@ namespace WeatherApp
                                "Административный округ: {4}\n" +
                                "Тип: {5}\n" +
                                "====\n",
-        string PatternOfWeather = "Город: {5} | " +
-                                  "Дата: {0: dd/MM/yy} | " +
-                                  "Температура минимальная: {1} | " +
-                                  "Температура максимальная: {2} | " +
-                                  "Примечание на день: {3} | " +
-                                  "Примечание на ночь: {4} | ",
+        string PatternOfWeather = "City: {5} | " +
+                                  "Date: {0: dd/MM/yy} | " +
+                                  "Min. temp.: {1} | " +
+                                  "Max. temp.: {2} | " +
+                                  "Note for a daytime: {3} | " +
+                                  "Note for a nighttime: {4} | ",
 
         string ErorrsBySearch = "Не получилось отобразить запрашиваемый город.\n" +
                                 "Возможные причины: \n" +
@@ -71,7 +71,7 @@ namespace WeatherApp
         ///Ссылка для вывода погоды по конкретному городу на 5 дней.
         ///{0} = CurrentCity.Key, {1} = apiKey
         ///</summary>
-        public string GetWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{0}?apikey={1}&language=ru&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
+        public string GetWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{0}?apikey={1}&language=en&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
 
     }
 

@@ -12,25 +12,25 @@ namespace WeatherAppWeb
             _interface = new AppInterface();
             _basicCityInfos = _interface.GetSavedCity();
         }
-        public IDictionary<string, string> GetSavedCity()
+        
+        
+        
+        
+        public async Task<IEnumerable<string>> GetWeather(string cityName)
         {
-            var tempList = _interface.GetSavedCity();
-            var dictResult = new Dictionary<string, string>();
-            foreach (var city in tempList)
+            try
             {
-                if (dictResult.ContainsKey(city.Key))
-                    continue;
-                dictResult.Add(city.Key, city.EnglishName);
+                var cityList = await _interface.FindCityAsync(cityName, "en");
+                if (cityList == null)
+                    return null;
+
+                return await _interface.GetPrepareWeatherAsync(cityList.First());
             }
-            return dictResult;
-        }
-        public IEnumerable<string> GetWeather(string cityKey)
-        {   
-            RootBasicCityInfo currentCity = (from city 
-                                             in _basicCityInfos 
-                                             where city.Key == cityKey 
-                                             select city).FirstOrDefault();
-            return _interface.GetPrepareWeatherAsync(currentCity).Result;        
+            catch (Exception ex) 
+            { 
+                await Console.Out.WriteLineAsync(ex.Message);
+                return null;
+            }
 
         }
     }

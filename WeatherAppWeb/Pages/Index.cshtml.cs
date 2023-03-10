@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace WeatherAppWeb.Pages
 {
@@ -8,13 +10,11 @@ namespace WeatherAppWeb.Pages
         private readonly ILogger<IndexModel> _logger;
 
         private  WeatherAppInterfaceModel _weatherModel;
-        public IDictionary<string, string> Cities { get; set; }
         public IEnumerable<string> Weather { get; set; }
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
             _weatherModel = new WeatherAppInterfaceModel();
-            Cities = _weatherModel.GetSavedCity();
             Weather = new List<string>();
         }
 
@@ -22,15 +22,15 @@ namespace WeatherAppWeb.Pages
         {
             
         }
-        public IActionResult OnPost(string cityName)
+        public async Task<IActionResult> OnPost(string cityName)
         {
-            var cityKey = Cities.Where(k => k.Value == cityName).Select(k => k.Key).FirstOrDefault();
-            if (!string.IsNullOrEmpty(cityKey))
-            {
-                Weather = _weatherModel.GetWeather(cityKey);
+            if(cityName == null)
                 return Page();
-            }
-            return NotFound();
+            Weather = await _weatherModel.GetWeather(cityName) ?? Weather.Append("The city was not found");
+            return Page();
+
         }
+        
+        
     }
 }
