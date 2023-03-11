@@ -105,15 +105,14 @@ namespace WeatherApp
             }
             
         }
-        public async Task<List<string>> GetPrepareWeather(RootBasicCityInfo cityInfo)
+        public async Task<List<string>> GetPreparedWeather(RootBasicCityInfo cityInfo)
         {
             var tempWeather = await GetWeatherDataFromServerAsync(cityInfo);
             var list = new List<string>();
             
             foreach (var item in tempWeather.DailyForecasts)
             {
-                list.Add(string.Format(textMessages.PatternOfWeather, item.Date, 
-                                                                      item.Temperature.Minimum.Value,
+                list.Add(string.Format(textMessages.PatternOfWeather, item.Temperature.Minimum.Value,
                                                                       item.Temperature.Maximum.Value, 
                                                                       item.Day.IconPhrase, 
                                                                       item.Night.IconPhrase, 

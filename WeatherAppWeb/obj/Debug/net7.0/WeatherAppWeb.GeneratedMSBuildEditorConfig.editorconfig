@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\C#\Git\WeatherApp-ASP.NET\WeatherAppWeb
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/C\#/Git/WeatherApp-ASP.NET/WeatherAppWeb/Pages/ApiKeyInsert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBpS2V5SW5zZXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/C\#/Git/WeatherApp-ASP.NET/WeatherAppWeb/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

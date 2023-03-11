@@ -6,25 +6,32 @@
 
 
 
-<h2>Enter city for get the weather</h2>
+<h2>Enter the city to see the weather</h2>
 
 <form method="post" >
-    <input type="text"  name="cityName" />
-    <input type="submit" value="Sumbit" />
+    
+    <div class="form-group">
+        <input type="text"  name="cityName" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 <h3>Weather:</h3>
     <form method="post">
-       <ul> 
-       @{
-            int i = 0;
-       }
-       @{
+       <ul>
+        @{
             if(!(Model.Weather.Count() < 5))
             {
+                int i = 0;
+                var dateTimeToday = DateTime.Today;
                 foreach (var item in Model.Weather)
-                {            
-                    i++;            
-                    <h4>"Day @i"</h4><dd>@item</dd>
+                {                    
+                    <form style="background-color:#E6E6FA" >
+                       @* <h4>"Day @i"</h4><dd>@item</dd>*@
+                       <h5>@dateTimeToday.AddDays(i).Date.ToShortDateString()</h5><li>@item</li>
+                    </form>
+                    i++;   
                 }
             }
             else

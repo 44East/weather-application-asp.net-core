@@ -16,7 +16,7 @@ namespace WeatherAppWeb
         
         
         
-        public async Task<IEnumerable<string>> GetWeather(string cityName)
+        public async Task<IEnumerable<string>?> GetWeather(string cityName)
         {
             try
             {
@@ -32,6 +32,14 @@ namespace WeatherAppWeb
                 return null;
             }
 
+        }
+        public async Task<string> GetStringFromTextFileAsync(string fileName)
+        {
+            return await _interface.GetStringFromTextFileAsync(fileName);
+        }
+        public async Task AddApiKey(string apiKey)
+        {
+            await _interface.AddUserApiAsync(apiKey);
         }
     }
 }

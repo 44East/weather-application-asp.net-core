@@ -15,18 +15,19 @@ namespace WeatherAppWeb.Pages
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
+        private readonly WeatherAppInterfaceModel _interface;
         public string Title { get; private set; }
-        private FileWorker<string> _fileWorker = new FileWorker<string>();
         
         public PrivacyModel(ILogger<PrivacyModel> logger)
         {
             _logger = logger;
+            _interface = new WeatherAppInterfaceModel();
              
         }
 
         public async Task OnGet()
         {
-            Title =  await _fileWorker.ReadTextFromLocalStorageAsync("README.md");
+            Title =  await _interface.GetStringFromTextFileAsync("README.md");
         }
     }
 }

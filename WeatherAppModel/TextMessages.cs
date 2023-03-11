@@ -15,12 +15,11 @@ namespace WeatherApp
                                "Административный округ: {4}\n" +
                                "Тип: {5}\n" +
                                "====\n",
-        string PatternOfWeather = "City: {5} | " +
-                                  "Date: {0: dd/MM/yy} | " +
-                                  "Min. temp.: {1} | " +
-                                  "Max. temp.: {2} | " +
-                                  "Note for a daytime: {3} | " +
-                                  "Note for a nighttime: {4} | ",
+        string PatternOfWeather = "City: {4} | " +
+                                  "Min. temp.: {0} | " +
+                                  "Max. temp.: {1} | " +
+                                  "Note for a daytime: {2} | " +
+                                  "Note for a nighttime: {3} | ",
 
         string ErorrsBySearch = "Не получилось отобразить запрашиваемый город.\n" +
                                 "Возможные причины: \n" +

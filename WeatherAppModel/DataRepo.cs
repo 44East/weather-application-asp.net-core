@@ -124,5 +124,9 @@ namespace WeatherApp
             }
             return resultList;
         }
+        public async Task<string> GetStringFromTextFileAsync(string fileName)
+        {
+            return await fileWorker.ReadTextFromLocalStorageAsync(fileName);
+        }
     }
 }

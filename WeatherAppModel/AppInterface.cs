@@ -45,6 +45,10 @@ namespace WeatherApp
             await ApiManager.WriteUserApiToLocalStorageAsync(api.Trim());            
 
         }
+        public async Task<string> GetStringFromTextFileAsync(string fileName)
+        {
+            return await DataRepo.GetStringFromTextFileAsync(fileName);
+        }
         #region Weather
         public async Task<RootWeather> GetWeatherForCityAsync(RootBasicCityInfo cityInfo)
         {
@@ -52,7 +56,7 @@ namespace WeatherApp
         }
         public async Task<List<string>> GetPrepareWeatherAsync(RootBasicCityInfo cityInfo)
         {
-            return await ReceiverWeather.GetPrepareWeather(cityInfo);
+            return await ReceiverWeather.GetPreparedWeather(cityInfo);
         }
         #endregion
 
