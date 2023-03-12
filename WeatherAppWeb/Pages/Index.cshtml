@@ -5,45 +5,44 @@
 }
 
 
+<body style="background-color:lightskyblue">
+    <h2>Enter the city to see the weather</h2>
 
-<h2>Enter the city to see the weather</h2>
-
-<form method="post" >
-    
-    <div class="form-group">
-        <input type="text"  name="cityName" />
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
-<h3>Weather:</h3>
     <form method="post">
-       <ul>
-        @{
-            if(!(Model.Weather.Count() < 5))
-            {
-                int i = 0;
-                var dateTimeToday = DateTime.Today;
-                foreach (var item in Model.Weather)
-                {                    
-                    <form style="background-color:#E6E6FA" >
-                       @* <h4>"Day @i"</h4><dd>@item</dd>*@
-                       <h5>@dateTimeToday.AddDays(i).Date.ToShortDateString()</h5><li>@item</li>
-                    </form>
-                    i++;   
-                }
-            }
-            else
-            {
-                foreach(var item in Model.Weather)
-                {
-                    <dd>@item</dd>
-                }
-            }
-       }
-        
-       </ul>
+    
+        <div class="form-group">
+            <input type="text" style="border-block-color:ActiveBorder" name="cityName"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
+           
+    <h3>Weather:</h3>
+        <form method="post">
+           <ul>
+            @{
+                if(!(Model.Weather.Count() < 5))
+                {
+                    int i = 0;
+                    var dateTimeToday = DateTime.Today;
+                   
+                    @foreach (var item in Model.Weather)
+                    { 
+                          <p><h5>@dateTimeToday.AddDays(i).Date.ToShortDateString()</h5><li>@item</li></p>                   
+                        i++;   
+                    }
+             
+                }
+                else
+                {
+                    foreach(var item in Model.Weather)
+                    {
+                        <dd>@item</dd>
+                    }
+                }
+           }
+        
+           </ul>
+        </form>
+    </body>
 
 
