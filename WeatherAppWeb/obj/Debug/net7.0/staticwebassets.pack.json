@@ -13,6 +13,226 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Cloudy.png",
+      "PackagePath": "staticwebassets\\images\\day\\Cloudy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Cold.png",
+      "PackagePath": "staticwebassets\\images\\day\\Cold.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Dreary.png",
+      "PackagePath": "staticwebassets\\images\\day\\Dreary.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Flurries.png",
+      "PackagePath": "staticwebassets\\images\\day\\Flurries.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Fog.png",
+      "PackagePath": "staticwebassets\\images\\day\\Fog.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Freezing Rain.png",
+      "PackagePath": "staticwebassets\\images\\day\\Freezing Rain.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Hazy Sunshine.png",
+      "PackagePath": "staticwebassets\\images\\day\\Hazy Sunshine.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Hot.png",
+      "PackagePath": "staticwebassets\\images\\day\\Hot.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Ice.png",
+      "PackagePath": "staticwebassets\\images\\day\\Ice.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Intermittent Clouds.png",
+      "PackagePath": "staticwebassets\\images\\day\\Intermittent Clouds.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Mostly Cloudy wh Flurries.png",
+      "PackagePath": "staticwebassets\\images\\day\\Mostly Cloudy wh Flurries.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Mostly Cloudy wh Showers.png",
+      "PackagePath": "staticwebassets\\images\\day\\Mostly Cloudy wh Showers.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Mostly Cloudy wh Snow.png",
+      "PackagePath": "staticwebassets\\images\\day\\Mostly Cloudy wh Snow.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Mostly Cloudy wh T-Storms.png",
+      "PackagePath": "staticwebassets\\images\\day\\Mostly Cloudy wh T-Storms.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Mostly Cloudy.png",
+      "PackagePath": "staticwebassets\\images\\day\\Mostly Cloudy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Mostly Sunny.png",
+      "PackagePath": "staticwebassets\\images\\day\\Mostly Sunny.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Partly Sunny wh Flurries.png",
+      "PackagePath": "staticwebassets\\images\\day\\Partly Sunny wh Flurries.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Partly Sunny wh Showers.png",
+      "PackagePath": "staticwebassets\\images\\day\\Partly Sunny wh Showers.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Partly Sunny wh T-Storms.png",
+      "PackagePath": "staticwebassets\\images\\day\\Partly Sunny wh T-Storms.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Partly Sunny.png",
+      "PackagePath": "staticwebassets\\images\\day\\Partly Sunny.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Rain and Snow.png",
+      "PackagePath": "staticwebassets\\images\\day\\Rain and Snow.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Rain.png",
+      "PackagePath": "staticwebassets\\images\\day\\Rain.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Showers.png",
+      "PackagePath": "staticwebassets\\images\\day\\Showers.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Sleet.png",
+      "PackagePath": "staticwebassets\\images\\day\\Sleet.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Snow.png",
+      "PackagePath": "staticwebassets\\images\\day\\Snow.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Sunny.png",
+      "PackagePath": "staticwebassets\\images\\day\\Sunny.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\T-Storms.png",
+      "PackagePath": "staticwebassets\\images\\day\\T-Storms.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Windy.png",
+      "PackagePath": "staticwebassets\\images\\day\\Windy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Clear.png",
+      "PackagePath": "staticwebassets\\images\\night\\Clear.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Cloudy.png",
+      "PackagePath": "staticwebassets\\images\\night\\Cloudy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Cold.png",
+      "PackagePath": "staticwebassets\\images\\night\\Cold.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Dreary.png",
+      "PackagePath": "staticwebassets\\images\\night\\Dreary.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Flurries.png",
+      "PackagePath": "staticwebassets\\images\\night\\Flurries.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Fog.png",
+      "PackagePath": "staticwebassets\\images\\night\\Fog.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Freezing Rain.png",
+      "PackagePath": "staticwebassets\\images\\night\\Freezing Rain.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Hazy Moonlight.png",
+      "PackagePath": "staticwebassets\\images\\night\\Hazy Moonlight.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Hot.png",
+      "PackagePath": "staticwebassets\\images\\night\\Hot.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Ice.png",
+      "PackagePath": "staticwebassets\\images\\night\\Ice.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Intermittent Clouds.png",
+      "PackagePath": "staticwebassets\\images\\night\\Intermittent Clouds.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Mostly Clear.png",
+      "PackagePath": "staticwebassets\\images\\night\\Mostly Clear.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Mostly Cloudy wh Flurries.png",
+      "PackagePath": "staticwebassets\\images\\night\\Mostly Cloudy wh Flurries.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Mostly Cloudy wh Showers.png",
+      "PackagePath": "staticwebassets\\images\\night\\Mostly Cloudy wh Showers.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Mostly Cloudy wh Snow.png",
+      "PackagePath": "staticwebassets\\images\\night\\Mostly Cloudy wh Snow.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Mostly Cloudy wh T-Storms.png",
+      "PackagePath": "staticwebassets\\images\\night\\Mostly Cloudy wh T-Storms.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Mostly Cloudy.png",
+      "PackagePath": "staticwebassets\\images\\night\\Mostly Cloudy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Partly Cloudy wh Showers.png",
+      "PackagePath": "staticwebassets\\images\\night\\Partly Cloudy wh Showers.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Partly Cloudy wh T-Storms.png",
+      "PackagePath": "staticwebassets\\images\\night\\Partly Cloudy wh T-Storms.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Partly Cloudy.png",
+      "PackagePath": "staticwebassets\\images\\night\\Partly Cloudy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Rain and Snow.png",
+      "PackagePath": "staticwebassets\\images\\night\\Rain and Snow.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Rain.png",
+      "PackagePath": "staticwebassets\\images\\night\\Rain.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Showers.png",
+      "PackagePath": "staticwebassets\\images\\night\\Showers.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Sleet.png",
+      "PackagePath": "staticwebassets\\images\\night\\Sleet.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Snow.png",
+      "PackagePath": "staticwebassets\\images\\night\\Snow.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\T-Storms.png",
+      "PackagePath": "staticwebassets\\images\\night\\T-Storms.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Windy.png",
+      "PackagePath": "staticwebassets\\images\\night\\Windy.png"
+    },
+    {
       "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

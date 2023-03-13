@@ -5,43 +5,44 @@
 }
 
 
-<body style="background-color:lightskyblue">
-    <h2>Enter the city to see the weather</h2>
+<body style="background-color:aliceblue">
+    <h3>Enter the city to see the weather</h3>
 
     <form method="post">
     
         <div class="form-group">
-            <input type="text" style="border-block-color:ActiveBorder" name="cityName"/>
+            <input type="text" style="align-content:stretch" name="cityName"/>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
            
-    <h3>Weather:</h3>
-        <form method="post">
-           <ul>
-            @{
-                if(!(Model.Weather.Count() < 5))
+    <h4>Weather:</h4>
+        <form method="post">           
+           @{
+                if(!(Model.Weather.Count < 5))
                 {
-                    int i = 0;
-                    var dateTimeToday = DateTime.Today;
-                   
-                    @foreach (var item in Model.Weather)
-                    { 
-                          <p><h5>@dateTimeToday.AddDays(i).Date.ToShortDateString()</h5><li>@item</li></p>                   
-                        i++;   
-                    }
-             
+                    var dateTimeToday = DateTime.Today; 
+                    <h5>@Model.Weather.First().Value.CityName</h5>
+                    foreach (var item in Model.Weather)
+                    {  
+                        <form  style="border-block-end-width:medium">
+                            <hr style="border:solid;width:stretch" />                            
+                                <h6>@dateTimeToday.AddDays(item.Key).Date.ToShortDateString()</h6>
+                                Min. Temp. : @item.Value.MinTemp<br>
+                                Max. Temp : @item.Value.MaxTemp<br>
+                                In daytime - @item.Value.DaytimeMessage <img src="images/day/@item.Value.DayImageName"  style="width:75px; height:45px" /><br>
+                                In nighttime - @item.Value.NighttimeMessage <img src="images/night/@item.Value.NightImageName" style="width:75px; height:45px" /><br>
+                            
+                            <hr style="border:solid"/>
+                        </form>    
+                    }             
                 }
-                else
+                else if(Model.Weather.Count == 0)
                 {
-                    foreach(var item in Model.Weather)
-                    {
-                        <dd>@item</dd>
-                    }
+                   <hr style="border:solid"/>
+                   <dd>@WeatherAppInterfaceModel.FailureSearch</dd>
                 }
-           }
-        
-           </ul>
+           }    
         </form>
     </body>
 
