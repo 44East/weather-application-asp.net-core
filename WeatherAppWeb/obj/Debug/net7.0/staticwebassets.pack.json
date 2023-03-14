@@ -13,6 +13,26 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\ico\\key.png",
+      "PackagePath": "staticwebassets\\ico\\key.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\ico\\key2.png",
+      "PackagePath": "staticwebassets\\ico\\key2.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\ico\\search-icon.png",
+      "PackagePath": "staticwebassets\\ico\\search-icon.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\ico\\search.png",
+      "PackagePath": "staticwebassets\\ico\\search.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\background.jpg",
+      "PackagePath": "staticwebassets\\images\\background.jpg"
+    },
+    {
       "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Cloudy.png",
       "PackagePath": "staticwebassets\\images\\day\\Cloudy.png"
     },
@@ -123,6 +143,10 @@
     {
       "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\day\\Windy.png",
       "PackagePath": "staticwebassets\\images\\day\\Windy.png"
+    },
+    {
+      "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\header.jpg",
+      "PackagePath": "staticwebassets\\images\\header.jpg"
     },
     {
       "Id": "D:\\C#\\Git\\WeatherApp-ASP.NET\\WeatherAppWeb\\wwwroot\\images\\night\\Clear.png",

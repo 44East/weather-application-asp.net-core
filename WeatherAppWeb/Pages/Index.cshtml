@@ -3,19 +3,50 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<style>
+    body{
+    background-image: url("images/background.jpg");    
+    background-blend-mode:overlay;
+    background-size:100%;
+    }
+    input[type=text]{        
+        padding: 12px 20px;
+        margin: 8px 0;
+        font-size:medium;
+        background-color: #f8f8f8;
+        background-image: url(ico/search.png);
+        background-size: 28px 28px;
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding-left: 50px;
+        border-radius: 4px;
+    }
+    button[type=button], button[type=submit] {
+        background-color:darkgrey;
+        border: none;
+        color: white;
+        padding: 14px 32px;
+        text-decoration: none;
+        cursor: pointer;
+        width: 255px;
+    }
+</style>
 
 
-<body style="background-color:aliceblue">
+<body  style="background-color:aliceblue">
+    <hr style="border:solid"/>
     <h3>Enter the city to see the weather</h3>
 
     <form method="post">
     
         <div class="form-group">
-            <input type="text" style="align-content:stretch" name="cityName"/>
+            <input type="text" name="cityName"/>
+        <div/>
+        <div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
-           
+    <hr style="border:solid"/>       
     <h4>Weather:</h4>
         <form method="post">           
            @{
@@ -26,20 +57,20 @@
                     foreach (var item in Model.Weather)
                     {  
                         <form  style="border-block-end-width:medium">
-                            <hr style="border:solid;width:stretch" />                            
+                            <hr  />                            
                                 <h6>@dateTimeToday.AddDays(item.Key).Date.ToShortDateString()</h6>
                                 Min. Temp. : @item.Value.MinTemp<br>
                                 Max. Temp : @item.Value.MaxTemp<br>
-                                In daytime - @item.Value.DaytimeMessage <img src="images/day/@item.Value.DayImageName"  style="width:75px; height:45px" /><br>
-                                In nighttime - @item.Value.NighttimeMessage <img src="images/night/@item.Value.NightImageName" style="width:75px; height:45px" /><br>
+                                Day - @item.Value.DaytimeMessage <img src="images/day/@item.Value.DayImageName"  style="width:75px; height:45px" /><br>
+                                Night - @item.Value.NighttimeMessage <img src="images/night/@item.Value.NightImageName" style="width:75px; height:45px" /><br>
                             
-                            <hr style="border:solid"/>
+                            <hr />
                         </form>    
                     }             
                 }
                 else if(Model.Weather.Count == 0)
                 {
-                   <hr style="border:solid"/>
+                   
                    <dd>@WeatherAppInterfaceModel.FailureSearch</dd>
                 }
            }    
