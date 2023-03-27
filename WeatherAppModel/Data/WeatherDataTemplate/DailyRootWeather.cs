@@ -10,5 +10,5 @@ namespace WeatherApp
     /// Базовая структура данных которая возвращается с сервера
     /// https://www.accuweather.com/
     /// </summary>
-    public record RootWeather(Headline Headline, List<DailyForecast> DailyForecasts);
+    public record DailyRootWeather(Headline Headline, List<DailyForecast> DailyForecasts);
 }

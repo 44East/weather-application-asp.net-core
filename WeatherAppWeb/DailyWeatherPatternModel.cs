@@ -1,8 +1,8 @@
 ﻿namespace WeatherAppWeb
 {
-    public class WeatherPatternModel
+    public class DailyWeatherPatternModel
     {        
-        public WeatherPatternModel(string cityName, string countryName, double minTemp, double maxTemp, string dayMessage, string nightMessage, string cityKey, string dayImageName, string nightImageName)
+        public DailyWeatherPatternModel( string cityName, string countryName, double minTemp, double maxTemp, string dayMessage, string nightMessage, string cityKey, string dayImageName, string nightImageName)
         {
             CityName = cityName;
             CountryName = countryName;

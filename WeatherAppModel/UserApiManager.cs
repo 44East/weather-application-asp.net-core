@@ -5,13 +5,10 @@ namespace WeatherApp
     public class UserApiManager
     {
         private TextMessages textMessages;
-        private TextWorker textWorker;
         private FileWorker<UserApi> fileWorker;
-        public UserApiManager(TextMessages textMessages, TextWorker textWorker)
+        public UserApiManager(TextMessages textMessages)
         {            
             this.textMessages = textMessages;
-            this.textWorker = textWorker;
-
             fileWorker= new FileWorker<UserApi>();
             UserApiList = new List<UserApi>();
         }
@@ -36,14 +33,14 @@ namespace WeatherApp
                 await fileWorker.WriteFileToLocalStorageAsync(UserApiList, textMessages.ApiKeysFileName);
             }
             catch(NullReferenceException ex)
-            { 
-                textWorker.ShowTheText(ex.Message);
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
                 return;
             }
             catch(JsonException ex)
             {
-                textWorker.ShowTheText(textMessages.ApiFileDoesntExist);
-                textWorker.ShowTheText(ex.Message);
+                await Console.Out.WriteLineAsync(textMessages.ApiFileDoesntExist);
+                await Console.Out.WriteLineAsync(ex.Message);
             }
         }
         /// <summary>
@@ -68,17 +65,17 @@ namespace WeatherApp
             }
             catch(JsonException ex)
             {
-                textWorker.ShowTheText(textMessages.ApiFileDoesntExist);
-                textWorker.ShowTheText(ex.Message);
+                Console.Out.WriteLineAsync(textMessages.ApiFileDoesntExist);
+                Console.Out.WriteLineAsync(ex.Message);
             }
             catch (FileNotFoundException ex)
             {
-                textWorker.ShowTheText(textMessages.ApiIsEmpty);
-                textWorker.ShowTheText(ex.Message);
+                Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                Console.Out.WriteLineAsync(ex.Message);
             }
             catch (Exception ex)
             {
-                textWorker.ShowTheText(ex.Message);
+                Console.Out.WriteLineAsync(ex.Message);
             }
         }
         

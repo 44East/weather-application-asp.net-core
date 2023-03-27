@@ -56,12 +56,6 @@ namespace WeatherApp
             FileInfo fileInfo = new FileInfo(fileName);
             await using FileStream fs = fileInfo.OpenWrite();
             JsonSerializer.Serialize(fs, currList);
-        }  
-        public async Task<string> ReadTextFromLocalStorageAsync(string fileName)
-        {
-            FileInfo file = new FileInfo(fileName);
-            using StreamReader sr = file.OpenText();
-            return await sr.ReadToEndAsync();          
         }
         
         

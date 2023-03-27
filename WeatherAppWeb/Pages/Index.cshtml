@@ -45,25 +45,27 @@
     
         <div class="form-group">
             <input type="text" name="cityName" />
-        </div>
-        
-        <div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <p><select size="3" multiple name="typeForecast" style="width:252px;">
+                <option disabled>Select the type forecast...</option>
+                <option selected value="5Day">5 Day forecast</option>
+                <option value="12Hour">12 Hour forecast</option>
+            </select></p>
+            <button type="submit" class="btn btn-primary" >Submit</button>
         </div>
     </form>
     <hr style="border:solid"/>       
     <h4>Weather:</h4>
         <form method="post">           
            @{
-                if(!(Model.Weather.Count < 5))
+                if(Model.Weather.Count > 0)
                 {
-                    var dateTimeToday = DateTime.Today; 
                     <h5>@Model.Weather.First().Value.CityName</h5>
                     foreach (var item in Model.Weather)
                     {  
                         <form  style="border-block-end-width:medium">
                             <hr  />                            
-                                <h6>@dateTimeToday.AddDays(item.Key).Date.ToShortDateString()</h6>
+                                <h6>@item.Key.Date.ToShortDateString()</h6>
                                 Min. Temp. : @item.Value.MinTemp<br>
                                 Max. Temp : @item.Value.MaxTemp<br>
                                 Day - @item.Value.DaytimeMessage <img src="images/day/@item.Value.DayImageName"  style="width:75px; height:45px" /><br>
@@ -73,12 +75,27 @@
                         </form>    
                     }             
                 }
-                else if(Model.Weather.Count == 0)
+                else if(Model.HourlyWeather.Count > 0)
                 {
-                   
-                   <dd>@WeatherAppInterfaceModel.FailureSearch</dd>
+                    <h5>@Model.HourlyWeather.First().Value.CityName</h5>
+                    foreach (var item in Model.HourlyWeather)
+                    {
+                        <form  style="border-block-end-width:medium">
+                            <hr /> 
+                                <h6>@item.Key.ToShortTimeString()</h6>
+                                Temperature : @item.Value.Temperature °C<br>
+                                Precipitation - @item.Value.HasPrecipitation<br>
+                                Expects - @item.Value.ForecastMessage <img src="images/@item.Value.TimeOfNow/@item.Value.ImageForecastName" style="width:75px; height:45px" /><br>
+                            <hr />
+                        </form>  
+                    }
+
                 }
-           }    
+                else
+                {
+                    <dd>@WeatherAppInterfaceModel.FailureSearch</dd>
+                }
+        }    
         </form>
     </body>
 
