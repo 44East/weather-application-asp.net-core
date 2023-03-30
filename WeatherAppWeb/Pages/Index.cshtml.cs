@@ -31,7 +31,7 @@ namespace WeatherAppWeb.Pages
                 return Page();
             if(typeForecast.Equals("5Day"))
                 Weather = await _weatherModel.GetFiveDaysWeatherAsync(cityName);
-            if(typeForecast.Equals("12Hour"))
+            else if(typeForecast.Equals("12Hour"))
                 HourlyWeather = await _weatherModel.GetHalfDaysWeatherAsync(cityName);
             return Page();
 

@@ -24,13 +24,15 @@
         position:center;
     }
     button[type=button], button[type=submit] {
-        background-color:darkgrey;
+        background-color:cornflowerblue;
         border: none;
         color: white;
         padding: 14px 32px;
         text-decoration: none;
         cursor: pointer;
         width: 255px;
+    }
+    select {
     }
 </style>
 
@@ -39,20 +41,20 @@
     <hr style="border:solid"/>
     
         
-        <h3 style="background-color:darkgray;border-radius:3px;color:white;text-align:center">Enter the city to see the weather </h3>
+        <h3 style="background-color:cornflowerblue;border-radius:3px;color:white;text-align:center">Enter the city to see the weather </h3>
     
     <form method="post" style="position:center; align-content:center; align-items:center">
-    
-        <div class="form-group">
+        <div>       
             <input type="text" name="cityName" />
-
+        </div> 
+        <div>
             <p><select size="3" multiple name="typeForecast" style="width:252px;">
-                <option disabled>Select the type forecast...</option>
+                <option disabled>Select the forecast type...</option>
                 <option selected value="5Day">5 Day forecast</option>
                 <option value="12Hour">12 Hour forecast</option>
             </select></p>
             <button type="submit" class="btn btn-primary" >Submit</button>
-        </div>
+        </div>     
     </form>
     <hr style="border:solid"/>       
     <h4>Weather:</h4>
@@ -66,8 +68,8 @@
                         <form  style="border-block-end-width:medium">
                             <hr  />                            
                                 <h6>@item.Key.Date.ToShortDateString()</h6>
-                                Min. Temp. : @item.Value.MinTemp<br>
-                                Max. Temp : @item.Value.MaxTemp<br>
+                                Min. Temp. : @item.Value.MinTemp °C<br>
+                                Max. Temp : @item.Value.MaxTemp °C<br>
                                 Day - @item.Value.DaytimeMessage <img src="images/day/@item.Value.DayImageName"  style="width:75px; height:45px" /><br>
                                 Night - @item.Value.NighttimeMessage <img src="images/night/@item.Value.NightImageName" style="width:75px; height:45px" /><br>
                             
