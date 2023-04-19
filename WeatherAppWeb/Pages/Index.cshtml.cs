@@ -29,10 +29,16 @@ namespace WeatherAppWeb.Pages
         {
             if(cityName == null)
                 return Page();
-            if(typeForecast.Equals("5Day"))
+            if (typeForecast.Equals("5Day"))
+            {
                 Weather = await _weatherModel.GetFiveDaysWeatherAsync(cityName);
-            else if(typeForecast.Equals("12Hour"))
+                typeForecast = string.Empty;
+            }
+            if (typeForecast.Equals("12Hour"))
+            {
                 HourlyWeather = await _weatherModel.GetHalfDaysWeatherAsync(cityName);
+                typeForecast = string.Empty;
+            }
             return Page();
 
         }

@@ -48,10 +48,8 @@ namespace WeatherAppWeb
                                                                           item.Day.IconPhrase,
                                                                           item.Night.IconPhrase,
                                                                           cityFromTopSearch.Key,
-                                                                          //Cut symbol '/' from a text server result,
-                                                                          //and format the text message for dependence with a forecast image in a data source.
-                                                                          string.Concat(item.Day.IconPhrase.Replace('/', 'h').Trim(), ".png"),
-                                                                          string.Concat(item.Night.IconPhrase.Replace('/', 'h').Trim(), ".png")));
+                                                                          item.Day.Icon,
+                                                                          item.Night.Icon));
                 }
             return weatherResult;
         }
@@ -92,9 +90,7 @@ namespace WeatherAppWeb
                                                                                item.HasPrecipitation,
                                                                                item.PrecipitationProbability,
                                                                                item.IconPhrase,
-                                                                               //Cut symbol '/' from a text server result,
-                                                                               //and format the text message for dependence with a forecast image in a data source.
-                                                                               string.Concat(item.IconPhrase.Replace('/', 'h').Trim(), ".png")));
+                                                                               item.WeatherIcon));
                                                                          
             }
             return weatherResult;

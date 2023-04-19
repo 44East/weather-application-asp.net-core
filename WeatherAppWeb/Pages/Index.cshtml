@@ -50,7 +50,7 @@
         <div>
             <p><select size="3" multiple name="typeForecast" style="width:252px;">
                 <option disabled>Select the forecast type...</option>
-                <option selected value="5Day">5 Day forecast</option>
+                <option value="5Day">5 Day forecast</option>
                 <option value="12Hour">12 Hour forecast</option>
             </select></p>
             <button type="submit" class="btn btn-primary" >Submit</button>
@@ -70,8 +70,8 @@
                                 <h6>@item.Key.Date.ToShortDateString()</h6>
                                 Min. Temp. : @item.Value.MinTemp °C<br>
                                 Max. Temp : @item.Value.MaxTemp °C<br>
-                                Day - @item.Value.DaytimeMessage <img src="images/day/@item.Value.DayImageName"  style="width:75px; height:45px" /><br>
-                                Night - @item.Value.NighttimeMessage <img src="images/night/@item.Value.NightImageName" style="width:75px; height:45px" /><br>
+                                Day - @item.Value.DaytimeMessage <img src="images/forecast_view/@item.Value.DayWeatherIcon" style="width:75px; height:45px" /><br>
+                                Night - @item.Value.NighttimeMessage <img src="images/forecast_view/@item.Value.NightWeatherIcon" style="width:75px; height:45px" /><br>
                             
                             <hr />
                         </form>    
@@ -87,7 +87,7 @@
                                 <h6>@item.Key.ToShortTimeString()</h6>
                                 Temperature : @item.Value.Temperature °C<br>
                                 Precipitation - @item.Value.HasPrecipitation<br>
-                                Expects - @item.Value.ForecastMessage <img src="images/@item.Value.TimeOfNow/@item.Value.ImageForecastName" style="width:75px; height:45px" /><br>
+                                Expects - @item.Value.ForecastMessage <img src="images/forecast_view/@item.Value.WeatherIcon" style="width:75px; height:45px" /><br>
                             <hr />
                         </form>  
                     }

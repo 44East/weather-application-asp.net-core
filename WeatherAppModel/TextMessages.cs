@@ -71,7 +71,7 @@ namespace WeatherApp
         ///</summary>
         public string GetFiveDaysWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{0}?apikey={1}&language=en&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
         public string GetHalfDayWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{0}?apikey={1}&language=en&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
-
+        public string GetDetailedHalfDayWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/{0}?apikey={1}&language=en&details=true&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
     }
 
 }

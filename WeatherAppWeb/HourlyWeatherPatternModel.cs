@@ -2,7 +2,7 @@
 {
     public class HourlyWeatherPatternModel
     {
-        public HourlyWeatherPatternModel(string cityKey, string cityName, string countryName, double temperature, bool isDayLight, bool hasPrecipitation, int precipitationProbability, string forecastMessage, string imageForecastName)
+        public HourlyWeatherPatternModel(string cityKey, string cityName, string countryName, double temperature, bool isDayLight, bool hasPrecipitation, int precipitationProbability, string forecastMessage, int weatherIcon)
         {
             CityKey = cityKey;
             CityName = cityName;
@@ -13,7 +13,7 @@
             PrecipitationProbability = precipitationProbability;
             ForecastMessage = forecastMessage;
             TimeOfNow = isDayLight ? "day" : "night";
-            ImageForecastName = imageForecastName;
+            WeatherIcon = weatherIcon.ToString()+".png";
         }
 
         public string CityName { get; init; }
@@ -25,6 +25,6 @@
         public string CityKey { get; init; }
         public string ForecastMessage { get; init; }
         public string TimeOfNow { get; set; }
-        public string ImageForecastName { get; set; }
+        public string WeatherIcon { get; set; }
     }
 }

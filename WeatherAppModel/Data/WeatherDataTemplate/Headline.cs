@@ -13,8 +13,8 @@ namespace WeatherApp
         int Severity, 
         string Text, 
         string Category, 
-        DateTime EndDate, 
-        int EndEpochDate, 
+        DateTime? EndDate, 
+        int? EndEpochDate, 
         string MobileLink, 
         string Link
         );

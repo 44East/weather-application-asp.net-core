@@ -96,7 +96,46 @@ namespace WeatherApp
                 throw ex;
             }
         }
-        
+
+        public async Task<IEnumerable<HourlyDetailedForecast>> GetDetailedHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
+        {
+            string receivedWeatherForCurrentCity;
+            StringBuilder fullUrlToRequest = new StringBuilder();
+            try
+            {
+                string apiKey = apiManager.GetTheFirstKey();
+
+                fullUrlToRequest.AppendFormat(textMessages.GetDetailedHalfDayWeatherUrl, cityInfo.Key, apiKey);
+
+                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(fullUrlToRequest.ToString());
+
+                return JsonSerializer.Deserialize<IEnumerable<HourlyDetailedForecast>>(receivedWeatherForCurrentCity);
+            }
+            catch (ArgumentNullException ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                throw;
+            }
+            catch (NullReferenceException ex)
+            {
+                await Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                await Console.Out.WriteLineAsync(ex.Message);
+                throw;
+            }
+            catch (AggregateException ex)
+            {
+                await Console.Out.WriteLineAsync(textMessages.NetworkOrHostIsNotAwailable);
+                await Console.Out.WriteLineAsync(ex.Message);
+                throw;
+            }
+            catch (JsonException ex)
+            {
+                await Console.Out.WriteLineAsync(textMessages.ReceiveWeatherError);
+                await Console.Out.WriteLineAsync(ex.Message);
+                throw;
+            }
+        }
+
     }
 
 }
