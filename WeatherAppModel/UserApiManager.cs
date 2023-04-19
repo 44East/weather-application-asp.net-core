@@ -2,22 +2,23 @@
 
 namespace WeatherApp
 {
-    public class UserApiManager
+    internal class UserApiManager
     {
         private TextMessages textMessages;
         private FileWorker<UserApi> fileWorker;
-        public UserApiManager(TextMessages textMessages)
+        public UserApiManager()
         {            
-            this.textMessages = textMessages;
+            textMessages = new TextMessages();
             fileWorker= new FileWorker<UserApi>();
             UserApiList = new List<UserApi>();
+
         }
 
         /// <summary>
         /// Коллекция для хранения API ключей, коллекция подходит при использовании коммерческого доступа и хранении нескольких ключей, 
         /// соотсветсвенно можно реализовать необходимый выбор при запуске. 
         /// </summary>
-        private List<UserApi> UserApiList;
+        internal List<UserApi> UserApiList { get; private set; }
         /// <summary>
         /// Метод записывает API ключи в файл.
         /// </summary>
@@ -44,38 +45,30 @@ namespace WeatherApp
             }
         }
         /// <summary>
-        /// Возвращает первый доступный ключ из коллекции если коллекция пуста, возвращает null.
-        /// Полностью инкапсулирует коллекцию.
-        /// </summary>
-        /// <returns></returns>
-        public string GetTheFirstKey()
-        {
-            return UserApiList?.LastOrDefault()?.UserApiProperty ?? null;
-        }
-        /// <summary>
         /// При запуске всегда проверяется наличие файла ключей и читается информация из него,
         /// если файл не создан или отсутствует, выводится соответствующее сообщение и экземпляр файлового обработчика создает пустой файл 
         /// и пробрасывает соответствующее исключение.
         /// </summary>
-        public void ReadUserApiFromLocalStorage()
+        public async Task ReadUserApiFromLocalStorageAsync()
         {
             try
             {
-                UserApiList = fileWorker.ReadFileFromLocalDisk(textMessages.ApiKeysFileName); 
+                UserApiList = await fileWorker.ReadFileFromLocalDiskAsync(textMessages.ApiKeysFileName); 
             }
             catch(JsonException ex)
             {
-                Console.Out.WriteLineAsync(textMessages.ApiFileDoesntExist);
-                Console.Out.WriteLineAsync(ex.Message);
+                await Console.Out.WriteLineAsync(textMessages.ApiFileDoesntExist);
+                await Console.Out.WriteLineAsync(ex.Message);
+                
             }
             catch (FileNotFoundException ex)
             {
-                Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
-                Console.Out.WriteLineAsync(ex.Message);
-            }
+                await Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                await Console.Out.WriteLineAsync(ex.Message);
+                        }
             catch (Exception ex)
             {
-                Console.Out.WriteLineAsync(ex.Message);
+                await Console.Out.WriteLineAsync(ex.Message);
             }
         }
         

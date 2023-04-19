@@ -9,52 +9,38 @@ namespace WeatherApp
 {
     public class AppInterface
     {
-        public ReceiverWeather ReceiverWeather { get; private set; }
-        public TextMessages TextMessages { get; private set; }
-        public SearcherCity SearcherCity { get; private set; }
-        public UserApiManager ApiManager { get; private set; }
+        private OperationDataLayer _operationDAL;
 
         public AppInterface()
         {
-            TextMessages = new TextMessages();
-
-            ApiManager = new UserApiManager(TextMessages);
-            ApiManager.ReadUserApiFromLocalStorage();
-            SearcherCity = new SearcherCity(TextMessages, ApiManager);
-
-            ReceiverWeather = new ReceiverWeather(TextMessages, ApiManager);
-
+            _operationDAL = new OperationDataLayer();
         }
         public async Task AddUserApiAsync(string api)
         {
-            if (string.IsNullOrEmpty(api))
-            { return; }
-
-            await ApiManager.WriteUserApiToLocalStorageAsync(api.Trim());            
+            await _operationDAL.AddUserApiAsync(api);
 
         }
         #region Weather
         public async Task<DailyRootWeather> GetWeatherForCityAsync(RootBasicCityInfo cityInfo)
         {
-            return await ReceiverWeather.GetWeatherForFiveDaysAsync(cityInfo);
+            return await _operationDAL.GetWeatherForCityAsync(cityInfo);
         }
         
         public async Task<IEnumerable<HourlyForecast>>GetHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
         {
-            return await ReceiverWeather.GetHalfDayWeatherAsync(cityInfo);
+            return await _operationDAL.GetHalfDayWeatherAsync(cityInfo);
         }
         public async Task<IEnumerable<HourlyDetailedForecast>> GetDetailedHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
         {
-            return await ReceiverWeather.GetDetailedHalfDayWeatherAsync(cityInfo);
+            return await _operationDAL.GetDetailedHalfDayWeatherAsync(cityInfo);
         }
         #endregion
 
         #region City
         public async Task<IEnumerable<RootBasicCityInfo>> FindCityAsync(string cityName)
         {
-            return await SearcherCity.GetListOfCitesOnRequestAsync(cityName);
-        }
-        
+            return await _operationDAL.GetListOfCitesOnRequestAsync(cityName);
+        }       
 
         #endregion
     }

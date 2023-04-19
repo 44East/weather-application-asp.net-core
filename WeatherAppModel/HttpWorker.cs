@@ -5,7 +5,7 @@ namespace WeatherApp
     /// <summary>
     /// Класс получения информации о погоде с сервера в строковом формате.
     /// </summary>
-    public  class HttpWorker
+    internal class HttpWorker
     {
         private static HttpClient httpClient;
         private HttpWorker() { }
