@@ -1,0 +1,7 @@
+.vs/
+WeatherAppModel/bin
+WeatherAppModel/obj
+WeatherAppWeb/bin
+WeatherAppWeb/obj
+WeatherAppWeb/RootBasicCityInfo.json
+WeatherAppWeb/UserApiKeys.json

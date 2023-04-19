@@ -43,6 +43,10 @@ namespace WeatherApp
         {
             return await ReceiverWeather.GetHalfDayWeatherAsync(cityInfo);
         }
+        public async Task<IEnumerable<HourlyDetailedForecast>> GetDetailedHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
+        {
+            return await ReceiverWeather.GetDetailedHalfDayWeatherAsync(cityInfo);
+        }
         #endregion
 
         #region City

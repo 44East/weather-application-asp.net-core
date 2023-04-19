@@ -50,7 +50,7 @@ namespace WeatherApp
         /// <returns></returns>
         public string GetTheFirstKey()
         {
-            return UserApiList?.FirstOrDefault()?.UserApiProperty ?? null;
+            return UserApiList?.LastOrDefault()?.UserApiProperty ?? null;
         }
         /// <summary>
         /// При запуске всегда проверяется наличие файла ключей и читается информация из него,
