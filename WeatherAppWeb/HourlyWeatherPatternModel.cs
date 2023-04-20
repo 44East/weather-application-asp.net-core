@@ -16,20 +16,8 @@ namespace WeatherAppWeb
             CityKey = cityInfo.Key;
             TimeOfNow = forecast.IsDaylight ? "day" : "night";
             WeatherIcon = forecast.WeatherIcon.ToString() + ".png";
-        }
-        public HourlyWeatherPatternModel(string cityKey, string cityName, string countryName, double temperature, bool isDayLight, bool hasPrecipitation, int precipitationProbability, string forecastMessage, int weatherIcon)
-        {
-            CityKey = cityKey;
-            CityName = cityName;
-            CountryName = countryName;
-            Temperature = temperature;
-            IsDayLight = isDayLight;
-            HasPrecipitation = hasPrecipitation ? "Yes" : "No";
-            PrecipitationProbability = precipitationProbability;
-            ForecastMessage = forecastMessage;
-            TimeOfNow = isDayLight ? "day" : "night";
-            WeatherIcon = weatherIcon.ToString()+".png";
-        }
+        }  
+        
 
         public string CityName { get; init; }
         public string CountryName { get; init; }
