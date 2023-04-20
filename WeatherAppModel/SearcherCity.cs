@@ -7,9 +7,11 @@ namespace WeatherApp
     {
 
         private TextMessages textMessages;
-        public SearcherCity()
+        private readonly HttpClient _httpClient;
+        public SearcherCity(HttpClient httpClient)
         {
             textMessages = new TextMessages();
+            _httpClient = httpClient;
         }
 
         /// <summary>
@@ -24,7 +26,7 @@ namespace WeatherApp
             try
             { 
 
-                string prepareString = await HttpWorker.GetStringFromServerAsync(string.Format(textMessages.SearchCityUrl, apiKey, cityName));
+                string prepareString = await _httpClient.GetStringAsync(string.Format(textMessages.SearchCityUrl, apiKey, cityName));
 
                 var rbci = JsonSerializer.Deserialize<List<RootBasicCityInfo>>(prepareString);
                 if (rbci.Count == 0)

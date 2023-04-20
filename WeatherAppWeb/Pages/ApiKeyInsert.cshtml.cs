@@ -7,9 +7,9 @@ namespace WeatherAppWeb.Pages
     {
         private readonly ILogger<ApiKeyInsertModel> _logger;
         private readonly WeatherAppInterfaceModel _interface;
-        public ApiKeyInsertModel(ILogger<ApiKeyInsertModel> logger)
+        public ApiKeyInsertModel(ILogger<ApiKeyInsertModel> logger, WeatherAppInterfaceModel weatherAppInterfaceModel)
         {
-            _interface = new WeatherAppInterfaceModel();
+            _interface = weatherAppInterfaceModel;
             _logger = logger;
 
         }

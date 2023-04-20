@@ -16,10 +16,10 @@ namespace WeatherApp
 
         private bool _isApiDataInitialize;
 
-        public OperationDataLayer()
+        public OperationDataLayer(HttpClient httpClient)
         {
-            _receiverWeather = new ReceiverWeather();
-            _searcherCity = new SearcherCity();
+            _receiverWeather = new ReceiverWeather(httpClient);
+            _searcherCity = new SearcherCity(httpClient);
             _userApiManager = new UserApiManager();
             _isApiDataInitialize = false;
             _primaryApiKey = string.Empty;

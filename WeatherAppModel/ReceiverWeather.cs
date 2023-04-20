@@ -7,10 +7,12 @@ namespace WeatherApp
     internal class ReceiverWeather
     {
         private TextMessages textMessages;
-        public ReceiverWeather()
+        private readonly HttpClient _httpClient;
+        public ReceiverWeather(HttpClient httpClient)
         {
-            textMessages = new TextMessages(); 
-        }        
+            textMessages = new TextMessages();
+            _httpClient = httpClient;
+        }
         /// <summary>
         /// Метод запрашивает API ключ доступа к серверу и уникальный номер сохраненного города, если пара (ключ/номер) приняты сервером
         /// то метод выводит погоду на 5 дней по выбранному городу.
@@ -23,7 +25,7 @@ namespace WeatherApp
             try
             {
 
-                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));//HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<DailyRootWeather>(receivedWeatherForCurrentCity);
             }
@@ -57,7 +59,7 @@ namespace WeatherApp
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetHalfDayWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(textMessages.GetHalfDayWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<IEnumerable<HourlyForecast>>(receivedWeatherForCurrentCity);
             }
@@ -91,7 +93,7 @@ namespace WeatherApp
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<IEnumerable<HourlyDetailedForecast>>(receivedWeatherForCurrentCity);
             }

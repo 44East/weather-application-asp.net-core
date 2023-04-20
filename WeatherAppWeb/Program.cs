@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+
 namespace WeatherAppWeb
 {
     public class Program
@@ -8,6 +10,7 @@ namespace WeatherAppWeb
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddSingleton<WeatherAppInterfaceModel>(WeatherAppInterfaceModel.Instance);
 
             var app = builder.Build();
 

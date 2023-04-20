@@ -13,10 +13,10 @@ namespace WeatherAppWeb.Pages
         private readonly WeatherAppInterfaceModel _weatherModel;
         public IDictionary<DateTime, DailyWeatherPatternModel> Weather { get; set; }
         public IDictionary<DateTime, HourlyWeatherPatternModel> HourlyWeather { get; set; }
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, WeatherAppInterfaceModel weatherAppInterfaceModel)
         {
             _logger = logger;
-            _weatherModel = new WeatherAppInterfaceModel();
+            _weatherModel = weatherAppInterfaceModel;
             Weather = new Dictionary<DateTime, DailyWeatherPatternModel>();
             HourlyWeather = new Dictionary<DateTime, HourlyWeatherPatternModel>();
         }

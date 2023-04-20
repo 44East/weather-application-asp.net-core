@@ -2,14 +2,21 @@
 
 namespace WeatherAppWeb
 {
-    public class WeatherAppInterfaceModel
+    public sealed class WeatherAppInterfaceModel
     {
         public static readonly string FailureSearch = "The city was not found";
+        private static readonly HttpClient _httpCLient;
+        private static readonly Lazy<WeatherAppInterfaceModel> lazy = new Lazy<WeatherAppInterfaceModel>(() =>  new WeatherAppInterfaceModel());
         private readonly AppInterface _interface;
 
-        public WeatherAppInterfaceModel()
+        public static WeatherAppInterfaceModel Instance => lazy.Value;
+        private WeatherAppInterfaceModel()
         {
-            _interface = new AppInterface();
+            _interface = new AppInterface(_httpCLient);
+        }
+        static WeatherAppInterfaceModel()
+        {
+            _httpCLient = new HttpClient();
         }
 
         public async Task<IDictionary<DateTime, DailyWeatherPatternModel>> GetFiveDaysWeatherAsync(string cityName)
