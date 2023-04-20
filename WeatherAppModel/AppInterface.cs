@@ -2,11 +2,11 @@
 
 namespace WeatherApp
 {
-    public class AppInterface
+    public class ModelAPI
     {
         private OperationDataLayer _operationDAL;
 
-        public AppInterface(HttpClient httpClient)
+        public ModelAPI(HttpClient httpClient)
         {
             _operationDAL = new OperationDataLayer(httpClient);
         }

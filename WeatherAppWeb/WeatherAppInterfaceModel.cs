@@ -7,12 +7,12 @@ namespace WeatherAppWeb
         public static readonly string FailureSearch = "The city was not found";
         private static readonly HttpClient _httpCLient;
         private static readonly Lazy<WeatherAppInterfaceModel> lazy = new Lazy<WeatherAppInterfaceModel>(() =>  new WeatherAppInterfaceModel());
-        private readonly AppInterface _interface;
+        private readonly ModelAPI _modelAPI;
 
         public static WeatherAppInterfaceModel Instance => lazy.Value;
         private WeatherAppInterfaceModel()
         {
-            _interface = new AppInterface(_httpCLient);
+            _modelAPI = new ModelAPI(_httpCLient);
         }
         static WeatherAppInterfaceModel()
         {
@@ -32,14 +32,14 @@ namespace WeatherAppWeb
             RootBasicCityInfo cityFromTopSearch;//The current city instance from the temp collection
             try
             {
-                cityList = await _interface.FindCityAsync(cityName);//Search of the city
+                cityList = await _modelAPI.FindCityAsync(cityName);//Search of the city
 
                 if (cityList == null)//return the empty dictionary if the city didn't find
                     return weatherResult;
 
                 cityFromTopSearch = cityList.First();//Get the first item of the city instance from the collection because it has more accident
 
-                rawWeather = (await _interface.GetWeatherForCityAsync(cityFromTopSearch)).DailyForecasts;//Get the all weather data by day's from the property collection in a model of the APP
+                rawWeather = (await _modelAPI.GetWeatherForCityAsync(cityFromTopSearch)).DailyForecasts;//Get the all weather data by day's from the property collection in a model of the APP
             }
             catch (Exception ex)
             {
@@ -65,14 +65,14 @@ namespace WeatherAppWeb
             RootBasicCityInfo cityFromTopSearch;//The current city instance from the temp collection
             try
             {
-                cityList = await _interface.FindCityAsync(cityName);//Search of the city
+                cityList = await _modelAPI.FindCityAsync(cityName);//Search of the city
 
                 if (cityList == null)//return the empty dictionary if the city didn't find
                     return weatherResult;
 
                 cityFromTopSearch = cityList.First();//Get the first item of the city instance from the collection because it has more accident
 
-                rawWeather = await _interface.GetHalfDayWeatherAsync(cityFromTopSearch);//Get the all weather data by day's from the property collection in a model of the APP
+                rawWeather = await _modelAPI.GetHalfDayWeatherAsync(cityFromTopSearch);//Get the all weather data by day's from the property collection in a model of the APP
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace WeatherAppWeb
 
         public async Task AddApiKey(string apiKey)
         {
-            await _interface.AddUserApiAsync(apiKey);
+            await _modelAPI.AddUserApiAsync(apiKey);
         }
     }
 }
