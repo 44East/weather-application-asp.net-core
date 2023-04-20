@@ -1,18 +1,20 @@
-﻿namespace WeatherAppWeb
+﻿using WeatherApp;
+
+namespace WeatherAppWeb
 {
     public class DailyWeatherPatternModel
     {
-        public DailyWeatherPatternModel(string cityName, string countryName, double minTemp, double maxTemp, string dayMessage, string nightMessage, string cityKey, int dayWeatherIcon, int nightWeatherIcon)
+        public DailyWeatherPatternModel(DailyForecast forecast, RootBasicCityInfo cityInfo)
         {
-            CityName = cityName;
-            CountryName = countryName;
-            MinTemp = minTemp;
-            MaxTemp = maxTemp;
-            DaytimeMessage = dayMessage;
-            NighttimeMessage = nightMessage;
-            CityKey = cityKey;
-            DayWeatherIcon = dayWeatherIcon.ToString() + ".png";
-            NightWeatherIcon = nightWeatherIcon.ToString() + ".png";
+            CityName = cityInfo.EnglishName;
+            CountryName = cityInfo.Country.EnglishName;
+            MinTemp = forecast.Temperature.Minimum.Value;
+            MaxTemp = forecast.Temperature.Maximum.Value;
+            DaytimeMessage = forecast.Day.IconPhrase;
+            NighttimeMessage = forecast.Night.IconPhrase;
+            CityKey = cityInfo.Key;
+            DayWeatherIcon = forecast.Day.Icon.ToString() + ".png";
+            NightWeatherIcon = forecast.Night.Icon.ToString() + ".png";
         }
         public string CityName { get; init; }
         public string CountryName { get; init; }

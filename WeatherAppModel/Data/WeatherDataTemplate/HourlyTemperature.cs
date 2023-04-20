@@ -8,7 +8,7 @@ namespace WeatherApp
 {
     public record HourlyTemperature
     (
-        double Temperature,
+        double Value,
         string Unit,
         int UnitType
     );

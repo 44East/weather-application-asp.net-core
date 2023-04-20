@@ -11,27 +11,27 @@ namespace WeatherAppWeb
         {
             _interface = new AppInterface();
         }
-        
+
         public async Task<IDictionary<DateTime, DailyWeatherPatternModel>> GetFiveDaysWeatherAsync(string cityName)
         {
-            
+
             IEnumerable<RootBasicCityInfo> cityList;//The temp cities collection, the first city from collection has more accident
 
             IList<DailyForecast> rawWeather;//This collection contains the all weather data fields which received from server
 
             //Thic dictionary contains the Key = It's a day of weather, and the Value = a special pattern of the weather with a basic info.
             IDictionary<DateTime, DailyWeatherPatternModel> weatherResult = new Dictionary<DateTime, DailyWeatherPatternModel>();
-            
+
             RootBasicCityInfo cityFromTopSearch;//The current city instance from the temp collection
             try
             {
                 cityList = await _interface.FindCityAsync(cityName);//Search of the city
-                
+
                 if (cityList == null)//return the empty dictionary if the city didn't find
                     return weatherResult;
 
                 cityFromTopSearch = cityList.First();//Get the first item of the city instance from the collection because it has more accident
-                
+
                 rawWeather = (await _interface.GetWeatherForCityAsync(cityFromTopSearch)).DailyForecasts;//Get the all weather data by day's from the property collection in a model of the APP
             }
             catch (Exception ex)
@@ -41,16 +41,8 @@ namespace WeatherAppWeb
             }
             foreach (var item in rawWeather)//Insert the relevant data in the dict. from the raw weather collection
             {
-                weatherResult.Add(item.Date, new DailyWeatherPatternModel(cityFromTopSearch.EnglishName,
-                                                                          cityFromTopSearch.Country.EnglishName,
-                                                                          item.Temperature.Minimum.Value,
-                                                                          item.Temperature.Maximum.Value,
-                                                                          item.Day.IconPhrase,
-                                                                          item.Night.IconPhrase,
-                                                                          cityFromTopSearch.Key,
-                                                                          item.Day.Icon,
-                                                                          item.Night.Icon));
-                }
+                weatherResult.Add(item.Date, new DailyWeatherPatternModel(item, cityFromTopSearch));
+            }
             return weatherResult;
         }
         public async Task<IDictionary<DateTime, HourlyWeatherPatternModel>> GetHalfDaysWeatherAsync(string cityName)
@@ -82,16 +74,7 @@ namespace WeatherAppWeb
             }
             foreach (var item in rawWeather)//Insert the relevant data in the dict. from the raw weather collection
             {
-                weatherResult.Add(item.DateTime, new HourlyWeatherPatternModel(cityFromTopSearch.Key,
-                                                                               cityFromTopSearch.EnglishName,
-                                                                               cityFromTopSearch.Country.EnglishName,
-                                                                               item.Temperature.Temperature,
-                                                                               item.IsDaylight,
-                                                                               item.HasPrecipitation,
-                                                                               item.PrecipitationProbability,
-                                                                               item.IconPhrase,
-                                                                               item.WeatherIcon));
-                                                                         
+                weatherResult.Add(item.DateTime, new HourlyWeatherPatternModel(item, cityFromTopSearch));
             }
             return weatherResult;
         }

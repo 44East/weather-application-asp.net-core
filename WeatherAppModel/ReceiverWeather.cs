@@ -57,7 +57,7 @@ namespace WeatherApp
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetHalfDayWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<IEnumerable<HourlyForecast>>(receivedWeatherForCurrentCity);
             }
