@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace WeatherApp
 {
     /// <summary>
-    /// Базовая структура данных которая возвращается с сервера
-    /// https://www.accuweather.com/
+    /// Basic data structure returned from the server https://www.accuweather.com/
     /// </summary>
     public record DailyRootWeather(Headline Headline, List<DailyForecast> DailyForecasts);
 }

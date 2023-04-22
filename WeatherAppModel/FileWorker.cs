@@ -1,21 +1,22 @@
-﻿using System.Text.Json;
+﻿using System.Reflection.Metadata;
+using System.Text.Json;
 
 namespace WeatherApp
 {
     /// <summary>
-    /// Файловый обработчик, читает и записывает файлы.
-    /// Дженерик класс, в виду того что данные коллекций имеют разное наполнение, каждый новый экземпляр имеет неоходимый тип для вызывающего класса.
+    ///Generic type for reading, writing, and creating files
+    ///This type can handle different types of input/output operations.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">This type can be used with any JSON-based data storage.</typeparam>
     internal class FileWorker<T> where T : class
     {
         /// <summary>
-        /// Читает файл с жесткого диска, принимет название файла которое необходимо прочитать.
-        /// Если файл отсутствует, создает пустой файл и пробрасывает исключение для вызывающего кода.
+        ///Read files from local storage by filename
+        ///This type allows for reading files from local storage, taking the filename as a parameter.
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public async Task<List<T>> ReadFileFromLocalDiskAsync(string fileName)
+        /// <param name="fileName">Name of the file in a local drive</param>
+        /// <returns>A <see cref="List{T}"/> of <see cref="T"/> collection of user data</returns>
+        public async Task<List<T>> ReadFileFromLocalStorageAsync(string fileName)
         {
             try
             {
@@ -27,15 +28,14 @@ namespace WeatherApp
             }
             catch(FileNotFoundException ex)
             {
-                Task.Run(async ()=> await CreateFileAsync(fileName));
+                await CreateFileAsync(fileName);
                 throw;
             }
         }
         /// <summary>
-        /// Создает пустой файл с необходимым именем, не блокируя вызывающий поток.
+        ///Creates a new file if it doesn't exist
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
+        /// <param name="fileName">Name of the file in a local drive</param>
         private async Task CreateFileAsync(string fileName)
         {
             int bufferSize = 2 << 11;//4096 bytes, it's default buffer size in FileStream.
@@ -45,12 +45,12 @@ namespace WeatherApp
                                                 FileShare.None, 
                                                 bufferSize, 
                                                 FileOptions.Asynchronous);                                                
-        }        
+        }
         /// <summary>
-        /// Записывает полученную коллекцию от вызывающего кода в необходимое название файла.
+        ///Write a collection to local storage using the provided filename.
         /// </summary>
-        /// <param name="currList"></param>
-        /// <param name="fileName"></param>
+        /// <param name="currList">Collection of current keys during runtime.</param>
+        /// <param name="fileName">Name of the file in a local drive</param>
         public async Task WriteFileToLocalStorageAsync(List<T> currList, string fileName)
         {
             FileInfo fileInfo = new FileInfo(fileName);

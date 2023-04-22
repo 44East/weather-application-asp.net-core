@@ -1,11 +1,16 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
 
 namespace WeatherApp
 {
+    
     internal class UserApiManager
     {
         private TextMessages textMessages;
         private FileWorker<UserApi> fileWorker;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserApiManager"/> class.
+        /// </summary>
         public UserApiManager()
         {            
             textMessages = new TextMessages();
@@ -15,22 +20,19 @@ namespace WeatherApp
         }
 
         /// <summary>
-        /// Коллекция для хранения API ключей, коллекция подходит при использовании коммерческого доступа и хранении нескольких ключей, 
-        /// соотсветсвенно можно реализовать необходимый выбор при запуске. 
+        ///A collection for storing API keys, suitable for commercial use and capable of storing multiple keys.
+        ///This collection allows for selecting the necessary key during runtime.
         /// </summary>
         internal List<UserApi> UserApiList { get; private set; }
         /// <summary>
-        /// Метод записывает API ключи в файл.
+        /// Write the user key to the local storage
         /// </summary>
-        /// <param name="formalUserAPi"></param>
-        public async Task WriteUserApiToLocalStorageAsync(string formalUserAPi)
+        /// <param name="newUserAPi">Full new actual key for connecting to "accuweather.com" servers </param>
+        public async Task WriteUserApiToStorageAsync(string newUserAPi)
         {
             try
             {
-                if (string.IsNullOrEmpty(formalUserAPi))
-                    throw new NullReferenceException(textMessages.IncorrectInput);
-
-                UserApiList.Add(new UserApi(formalUserAPi));
+                UserApiList.Add(new UserApi(newUserAPi));
                 await fileWorker.WriteFileToLocalStorageAsync(UserApiList, textMessages.ApiKeysFileName);
             }
             catch(NullReferenceException ex)
@@ -45,15 +47,13 @@ namespace WeatherApp
             }
         }
         /// <summary>
-        /// При запуске всегда проверяется наличие файла ключей и читается информация из него,
-        /// если файл не создан или отсутствует, выводится соответствующее сообщение и экземпляр файлового обработчика создает пустой файл 
-        /// и пробрасывает соответствующее исключение.
+        /// Read all keys from local storage and insert them into the "UserApiList" collection.
         /// </summary>
         public async Task ReadUserApiFromLocalStorageAsync()
         {
             try
             {
-                UserApiList = await fileWorker.ReadFileFromLocalDiskAsync(textMessages.ApiKeysFileName); 
+                UserApiList = await fileWorker.ReadFileFromLocalStorageAsync(textMessages.ApiKeysFileName); 
             }
             catch(JsonException ex)
             {
