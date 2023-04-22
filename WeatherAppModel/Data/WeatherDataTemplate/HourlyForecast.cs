@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WeatherApp
 {
+    /// <summary>
+    /// Basic data structure returned from the server https://www.accuweather.com/
+    /// </summary>
     public record HourlyForecast
     (
        DateTime DateTime, 

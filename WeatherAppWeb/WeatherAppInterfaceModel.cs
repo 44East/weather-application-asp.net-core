@@ -88,6 +88,8 @@ namespace WeatherAppWeb
 
         public async Task AddApiKey(string apiKey)
         {
+            if (string.IsNullOrEmpty(apiKey))
+                return;
             await _modelAPI.AddUserApiAsync(apiKey);
         }
     }
