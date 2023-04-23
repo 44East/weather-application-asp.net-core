@@ -9,7 +9,6 @@ namespace WeatherApp
     /// </summary>
     internal class ReceiverWeather
     {
-        private TextMessages textMessages;
         private readonly HttpClient _httpClient;
         /// <summary>
         /// Initializes a new instance of the ReceiverWeather class with the specified HttpClient instance.
@@ -17,7 +16,6 @@ namespace WeatherApp
         /// <param name="httpClient">An instance of the HttpClient class.</param>
         public ReceiverWeather(HttpClient httpClient)
         {
-            textMessages = new TextMessages();
             _httpClient = httpClient;
         }
         /// <summary>
@@ -34,7 +32,7 @@ namespace WeatherApp
             try
             {
 
-                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));//HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));//HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<DailyRootWeather>(receivedWeatherForCurrentCity);
             }
@@ -45,19 +43,19 @@ namespace WeatherApp
             }
             catch (NullReferenceException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                await Console.Out.WriteLineAsync(TextMessages.ApiIsEmpty);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (AggregateException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.NetworkOrHostIsNotAwailable);
+                await Console.Out.WriteLineAsync(TextMessages.NetworkOrHostIsNotAwailable);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (JsonException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ReceiveWeatherError);
+                await Console.Out.WriteLineAsync(TextMessages.ReceiveWeatherError);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
@@ -75,7 +73,7 @@ namespace WeatherApp
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(textMessages.GetHalfDayWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetHalfDayWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<IEnumerable<HourlyForecast>>(receivedWeatherForCurrentCity);
             }
@@ -86,19 +84,19 @@ namespace WeatherApp
             }
             catch (NullReferenceException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                await Console.Out.WriteLineAsync(TextMessages.ApiIsEmpty);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (AggregateException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.NetworkOrHostIsNotAwailable);
+                await Console.Out.WriteLineAsync(TextMessages.NetworkOrHostIsNotAwailable);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (JsonException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ReceiveWeatherError);
+                await Console.Out.WriteLineAsync(TextMessages.ReceiveWeatherError);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
@@ -115,7 +113,7 @@ namespace WeatherApp
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<IEnumerable<HourlyDetailedForecast>>(receivedWeatherForCurrentCity);
             }
@@ -126,19 +124,19 @@ namespace WeatherApp
             }
             catch (NullReferenceException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                await Console.Out.WriteLineAsync(TextMessages.ApiIsEmpty);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (AggregateException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.NetworkOrHostIsNotAwailable);
+                await Console.Out.WriteLineAsync(TextMessages.NetworkOrHostIsNotAwailable);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (JsonException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ReceiveWeatherError);
+                await Console.Out.WriteLineAsync(TextMessages.ReceiveWeatherError);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }

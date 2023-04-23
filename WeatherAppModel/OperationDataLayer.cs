@@ -30,6 +30,7 @@ namespace WeatherApp
         /// <summary>
         /// Initializes the API data asynchronously by reading the user API from local storage and updating the API data.
         /// </summary>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         private async Task InitializeApiDataAsync()
         {
             await _userApiManager.ReadUserApiFromLocalStorageAsync();
@@ -48,6 +49,7 @@ namespace WeatherApp
         /// <summary>
         /// Ensures that the API data is initialized asynchronously.
         /// </summary>
+        ///<returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         private async Task EnsureInitializeApiDataAsync()
         {
             if (!_isApiDataInitialize)
@@ -57,6 +59,7 @@ namespace WeatherApp
         /// Adds the specified user API key asynchronously by writing it to storage and updating the API data.
         /// </summary>
         /// <param name="api">The user API key to add.</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         public async Task AddUserApiAsync(string api)
         {
             if (string.IsNullOrEmpty(api))

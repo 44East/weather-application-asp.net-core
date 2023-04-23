@@ -21,6 +21,7 @@ namespace WeatherApp
         /// Adds a new user API to the list of APIs.
         /// </summary>
         /// <param name="api">The API to add.</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         public async Task AddUserApiAsync(string api)
         {
             await _operationDAL.AddUserApiAsync(api);

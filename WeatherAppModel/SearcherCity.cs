@@ -7,8 +7,6 @@ namespace WeatherApp
     /// </summary>
     internal class SearcherCity
     {
-
-        private TextMessages textMessages;
         private readonly HttpClient _httpClient;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearcherCity"/> class with the specified <see cref="HttpClient"/>.
@@ -16,7 +14,6 @@ namespace WeatherApp
         /// <param name="httpClient">An instance of <see cref="HttpClient"/> to use for making requests.</param>
         public SearcherCity(HttpClient httpClient)
         {
-            textMessages = new TextMessages();
             _httpClient = httpClient;
         }
 
@@ -31,30 +28,30 @@ namespace WeatherApp
             try
             { 
 
-                string prepareString = await _httpClient.GetStringAsync(string.Format(textMessages.SearchCityUrl, apiKey, cityName));
+                string prepareString = await _httpClient.GetStringAsync(string.Format(TextMessages.SearchCityUrl, apiKey, cityName));
 
                 var rbci = JsonSerializer.Deserialize<List<RootBasicCityInfo>>(prepareString);
                 if (rbci.Count == 0)
-                    throw new JsonException(textMessages.SearchError);
+                    throw new JsonException(TextMessages.SearchError);
 
                 return rbci;
 
             }
             catch (NullReferenceException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ApiIsEmpty);
+                await Console.Out.WriteLineAsync(TextMessages.ApiIsEmpty);
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
             catch (AggregateException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.NetworkOrHostIsNotAwailable);
+                await Console.Out.WriteLineAsync(TextMessages.NetworkOrHostIsNotAwailable);
                 await Console.Out.WriteLineAsync(ex.Message);               
                 throw;
             }
             catch (JsonException ex)
             {
-                await Console.Out.WriteLineAsync(textMessages.ErorrsBySearch + ex.Message);
+                await Console.Out.WriteLineAsync(TextMessages.ErorrsBySearch + ex.Message);
                 throw;
             }
 

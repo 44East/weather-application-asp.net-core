@@ -25,6 +25,15 @@ namespace WeatherAppWeb.Pages
         {
             
         }
+        /// <summary>
+        /// Handles the HTTP POST request to retrieve weather data for a given city and forecast type.
+        /// If cityName is null, returns the page without performing any action.
+        /// If typeForecast is "5Day", retrieves the five-day weather forecast for the given city using the injected _weatherModel object.
+        /// If typeForecast is "12Hour", retrieves the half-day weather forecast for the given city using the injected _weatherModel object.
+        /// </summary>
+        /// <param name="cityName">The name of the city for which weather data is requested.</param>
+        /// <param name="typeForecast">The type of forecast to retrieve ("5Day" or "12Hour").</param>
+        /// <returns>The page with the retrieved weather data.</returns>
         public async Task<IActionResult> OnPost(string cityName, string typeForecast)
         {
             if(cityName == null)
