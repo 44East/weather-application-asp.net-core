@@ -36,6 +36,7 @@ namespace WeatherApp
         ///Creates a new file if it doesn't exist
         /// </summary>
         /// <param name="fileName">Name of the file in a local drive</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         private async Task CreateFileAsync(string fileName)
         {
             int bufferSize = 2 << 11;//4096 bytes, it's default buffer size in FileStream.
@@ -48,11 +49,17 @@ namespace WeatherApp
         }
         /// <summary>
         ///Write a collection to local storage using the provided filename.
+        ///Before writing, it checks file on existing and if the file doesn't exist, it can create file
         /// </summary>
         /// <param name="currList">Collection of current keys during runtime.</param>
         /// <param name="fileName">Name of the file in a local drive</param>
+        /// <returns>A <see cref="Task"/>  representing the asynchronous operation.</returns>
         public async Task WriteFileToLocalStorageAsync(List<T> currList, string fileName)
         {
+            if (!File.Exists(fileName))
+            {
+                await CreateFileAsync(fileName);
+            }
             FileInfo fileInfo = new FileInfo(fileName);
             await using FileStream fs = fileInfo.OpenWrite();
             JsonSerializer.Serialize(fs, currList);

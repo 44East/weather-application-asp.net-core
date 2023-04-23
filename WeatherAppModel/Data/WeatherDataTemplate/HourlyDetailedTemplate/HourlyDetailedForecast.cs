@@ -9,7 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace WeatherApp
 {
     /// <summary>
-    /// The full weather forecast template for the daily forecasts.
+    /// The full weather forecast template for the hourly forecasts.
     /// </summary>
     /// <param name="DateTime">DateTime of the forecast, displayed in ISO8601 format.</param>
     /// <param name="EpochDateTime">DateTime of the forecast, displayed as the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT).</param>
