@@ -51,7 +51,7 @@ namespace WeatherApp
         /// </summary>
         /// <param name="cityInfo">The basic information for the city.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="HourlyDetailedForecast"/> objects representing the weather forecast.</returns>
-        public async Task<IEnumerable<HourlyDetailedForecast>> GetDetailedHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
+        public async Task<IEnumerable<HourlyDetailedForecast>> GetHalfDaysDetailedWeatherAsync(RootBasicCityInfo cityInfo)
         {
             return await _operationDAL.GetDetailedHalfDayWeatherAsync(cityInfo);
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using WeatherApp;
+using WeatherAppWeb.Patterns;
 
 namespace WeatherAppWeb
 {
@@ -107,6 +108,7 @@ namespace WeatherAppWeb
 
                 // Get all the weather data for the specified city.
                 rawWeather = await _modelAPI.GetHalfDayWeatherAsync(cityFromTopSearch);
+                await GetHalfDaysDetailedWeatherAsync(cityName);
             }
             catch (Exception ex)
             {
@@ -118,6 +120,53 @@ namespace WeatherAppWeb
             foreach (var item in rawWeather)
             {
                 weatherResult.Add(item.DateTime, new HourlyWeatherPatternModel(item, cityFromTopSearch));
+            }
+            return weatherResult;
+        }
+        /// <summary>
+        /// Gets the detailed weather forecast for the next 12 hours for the specified city.
+        /// </summary>
+        /// <param name="cityName">The name of the city for which to retrieve the weather forecast.</param>
+        /// <returns>A <see cref="IDictionary{TKey, TValue}"/> containing <see cref="HourlyDetailedWeatherPatternModel"/>  for each day.</returns>
+        public async Task<IDictionary<DateTime, HourlyDetailedWeatherPatternModel>> GetHalfDaysDetailedWeatherAsync(string cityName)
+        {
+            // A temporary collection of cities. The first city in the collection has the highest probability of being a match.
+            IEnumerable<RootBasicCityInfo> cityList;
+
+            // This collection will be contains all weather data fields received from the server.
+            IEnumerable<HourlyDetailedForecast> rawWeather;
+
+            //This dictionary will contain weather data for 12 hours according to the weather pattern.
+            IDictionary<DateTime, HourlyDetailedWeatherPatternModel> weatherResult = new Dictionary<DateTime, HourlyDetailedWeatherPatternModel>();
+
+
+            // The current city instance from the temporary collection.
+            RootBasicCityInfo cityFromTopSearch;
+            try
+            {
+                // Search for the specified city.
+                cityList = await _modelAPI.FindCityAsync(cityName);
+
+                // Return an empty dictionary if the city is not found.
+                if (cityList == null)
+                    return weatherResult;
+
+                // Get the first item from the city collection as it has the highest probability of being a match.
+                cityFromTopSearch = cityList.First();
+
+                // Get all the weather data for the specified city.
+                rawWeather = await _modelAPI.GetHalfDaysDetailedWeatherAsync(cityFromTopSearch);
+            }
+            catch (Exception ex)
+            {
+                // Log the error and return the empty dictionary.
+                await Console.Out.WriteLineAsync(ex.Message);
+                return weatherResult;
+            }
+            // Insert the relevant data in the dictionary from the raw weather collection.
+            foreach (var item in rawWeather)
+            {
+                weatherResult.Add(item.DateTime, new HourlyDetailedWeatherPatternModel(item, cityFromTopSearch));
             }
             return weatherResult;
         }

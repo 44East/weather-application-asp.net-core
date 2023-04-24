@@ -1,6 +1,6 @@
 ﻿using WeatherApp;
 
-namespace WeatherAppWeb
+namespace WeatherAppWeb.Patterns
 {
     /// <summary>
     /// Represents a model for hourly weather patterns.

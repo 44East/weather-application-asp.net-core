@@ -113,7 +113,7 @@ namespace WeatherApp
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetDetailedHalfDayWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<IEnumerable<HourlyDetailedForecast>>(receivedWeatherForCurrentCity);
             }
