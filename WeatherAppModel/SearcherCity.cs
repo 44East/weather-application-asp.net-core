@@ -31,8 +31,8 @@ namespace WeatherApp
                 string prepareString = await _httpClient.GetStringAsync(string.Format(TextMessages.SearchCityUrl, apiKey, cityName));
 
                 var rbci = JsonSerializer.Deserialize<List<RootBasicCityInfo>>(prepareString);
-                if (rbci.Count == 0)
-                    throw new JsonException(TextMessages.SearchError);
+                if (rbci.Count == 0 || rbci == null)
+                    return null;
 
                 return rbci;
 

@@ -1,6 +1,6 @@
 ﻿using WeatherApp;
 
-namespace WeatherAppWeb
+namespace WeatherAppWeb.Patterns
 {
     /// <summary>
     /// Represents a model of daily weather patterns that contains information about the weather in a specific city for one day.

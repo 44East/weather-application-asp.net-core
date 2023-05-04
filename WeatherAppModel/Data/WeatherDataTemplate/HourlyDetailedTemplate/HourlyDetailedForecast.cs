@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+﻿
 
 namespace WeatherApp
 {
@@ -22,6 +16,7 @@ namespace WeatherApp
     /// <param name="RealFeelTemperatureShade">Rounded value in specified units. May be NULL.</param>
     /// <param name="WetBulbTemperature">The temperature to which air may be cooled by evaporating water into it at constant pressure until it reaches saturation. Rounded value in specified units. May be NULL.</param>
     /// <param name="DewPoint">The dew point is the temperature the air needs to be cooled to (at constant pressure) in order to achieve a relative humidity (RH) of 100%.</param>
+    /// <param name="Wind">The arrow shows the direction that the wind is blowing and it speed</param>
     /// <param name="WindGust">A gust or wind gust is a brief increase in the speed of the wind, usually less than 20 seconds.</param>
     /// <param name="RelativeHumidity">Relative humidity, often expressed as a percentage, indicates a present state of absolute humidity relative to a maximum humidity given the same temperature.</param>
     /// <param name="IndoorRelativeHumidity">(In buildings) Relative humidity, often expressed as a percentage, indicates a present state of absolute humidity relative to a maximum humidity given the same temperature.</param>
@@ -43,6 +38,8 @@ namespace WeatherApp
     /// <param name="SolarIrradiance">The solar irradiance is the output of light energy from the entire disk of the Sun, measured at the Earth.</param>
     /// <param name="MobileLink">Link to the hourly forecast for the requested location on AccuWeather`s mobile site.</param>
     /// <param name="Link">Link to the hourly forecast for the requested location on AccuWeather`s web site.</param>
+    /// <param name="PrecipitationIntensity">The rate of precipitation, usually expressed in millimeters or inches per hour</param>
+    /// <param name="PrecipitationType">The most common types of precipitation are rain, hail, and snow.</param>
     public record HourlyDetailedForecast
     (
        DateTime DateTime, 
@@ -66,6 +63,8 @@ namespace WeatherApp
        WetBulbTemperature WetBulbTemperature,
 
        DewPoint DewPoint,
+
+       Wind Wind,
 
        WindGust WindGust,
 
@@ -99,6 +98,9 @@ namespace WeatherApp
        SolarIrradiance SolarIrradiance,
 
        string MobileLink, 
-       string Link 
+       string Link,
+
+       string PrecipitationType,
+       string PrecipitationIntensity
     );
 }

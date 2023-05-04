@@ -1,104 +1,80 @@
-﻿@page 
-@model IndexModel
+﻿@page
+@model WeatherAppWeb.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
 }
 <style>
-    body{
-    background-image: url("images/background.jpg");    
-    background-blend-mode:overlay;
-    background-size:100%;
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
 
+    #main-heading {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
     }
-    input[type=text]{        
-        padding: 12px 20px;
-        margin: 8px 0;
-        font-size:medium;
-        background-color: #f8f8f8;
-        background-image: url(ico/search.png);
-        background-size: 28px 28px;
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        padding-left: 50px;
-        border-radius: 4px;
-        position:center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
     }
-    button[type=button], button[type=submit] {
-        background-color:cornflowerblue;
+
+    label {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
         border: none;
-        color: white;
-        padding: 14px 32px;
-        text-decoration: none;
-        cursor: pointer;
-        width: 255px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        font-size: 20px;
     }
-    select {
+
+    button[type="submit"] {
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        transition: all 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
     }
 </style>
+<h1 id="main-heading">Weather Forecast</h1>
+<form method="post">
+    <div>
+        <label>
+            <input type="radio" name="forecastType" value="Day" checked/>
+            Day
+        </label>
+        <label>
+            <input type="radio" name="forecastType" value="Hour" />
+            Hour
+        </label>
+    </div>
+<div style="margin-top: 30px;">
+    <label>
+        Location:
+        <input type="text" name="cityName" placeholder="Enter city name" required />
+    </label>
+</div>
 
-
-<body  style="background-color:aliceblue">
-    <hr style="border:solid"/>
-    
-        
-        <h3 style="background-color:cornflowerblue;border-radius:3px;color:white;text-align:center">Enter the city to see the weather </h3>
-    
-    <form method="post" style="position:center; align-content:center; align-items:center">
-        <div>       
-            <input type="text" name="cityName" />
-        </div> 
-        <div>
-            <p><select size="3" multiple name="typeForecast" style="width:252px;">
-                <option disabled>Select the forecast type...</option>
-                <option value="5Day">5 Day forecast</option>
-                <option value="12Hour">12 Hour forecast</option>
-            </select></p>
-            <button type="submit" class="btn btn-primary" >Submit</button>
-        </div>     
-    </form>
-    <hr style="border:solid"/>       
-    <h4>Weather:</h4>
-        <form method="post">           
-           @{
-                if(Model.Weather.Count > 0)
-                {
-                    <h5>@Model.Weather.First().Value.CityName</h5>
-                    foreach (var item in Model.Weather)
-                    {  
-                        <form  style="border-block-end-width:medium">
-                            <hr  />                            
-                                <h6>@item.Key.Date.ToShortDateString()</h6>
-                                Min. Temp. : @item.Value.MinTemp °C<br>
-                                Max. Temp : @item.Value.MaxTemp °C<br>
-                                Day - @item.Value.DaytimeMessage <img src="images/forecast_view/@item.Value.DayWeatherIcon" style="width:75px; height:45px" /><br>
-                                Night - @item.Value.NighttimeMessage <img src="images/forecast_view/@item.Value.NightWeatherIcon" style="width:75px; height:45px" /><br>
-                            
-                            <hr />
-                        </form>    
-                    }             
-                }
-                else if(Model.HourlyWeather.Count > 0)
-                {
-                    <h5>@Model.HourlyWeather.First().Value.CityName</h5>
-                    foreach (var item in Model.HourlyWeather)
-                    {
-                        <form  style="border-block-end-width:medium">
-                            <hr /> 
-                                <h6>@item.Key.ToShortTimeString()</h6>
-                                Temperature : @item.Value.Temperature °C<br>
-                                Precipitation - @item.Value.HasPrecipitation<br>
-                                Expects - @item.Value.ForecastMessage <img src="images/forecast_view/@item.Value.WeatherIcon" style="width:75px; height:45px" /><br>
-                            <hr />
-                        </form>  
-                    }
-
-                }
-                else
-                {
-                    <dd>@WeatherAppInterfaceModel.FailureSearch</dd>
-                }
-        }    
-        </form>
-    </body>
-
-
+<div style="margin-top: 30px;">
+    <button type="submit">Get Forecast</button>
+</div>
+</form> 
