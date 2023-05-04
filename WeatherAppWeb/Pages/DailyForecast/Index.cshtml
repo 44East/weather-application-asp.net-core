@@ -1,0 +1,62 @@
+﻿@page
+@model WeatherAppWeb.Pages.DailyForecast.IndexModel
+@{
+}
+
+<div class="container">
+    <h1>@Model.DailyWeather.Values.First().CityName</h1>
+    <h2>@Model.DailyWeather.Values.First().CountryName</h2>
+
+    @foreach (var item in Model.DailyWeather)
+    {
+        <div class="weather-block">
+            <div class="weather-date">@item.Key.ToShortDateString()</div>
+            <div class="weather-temperature">Min Temp: @item.Value.MinTemp °C | Max Temp: @item.Value.MaxTemp °C</div>
+            <div class="weather-message">Daytime Message: @item.Value.DaytimeMessage</div>  
+            <img class="weather-icon" src="images/forecast_view/@item.Value.DayWeatherIcon" alt="@item.Value.DaytimeMessage" />
+            <div class="weather-message">Nighttime Message: @item.Value.NighttimeMessage</div> 
+            <img class="weather-icon" src="images/forecast_view/@item.Value.NightWeatherIcon" alt="@item.Value.NighttimeMessage" />   
+        </div>
+    }
+</div>
+
+<style>
+    .container {
+        width: 80%;
+        margin: auto;
+    }
+
+    .weather-block {
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .weather-date {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #666;
+    }
+
+    .weather-temperature {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #222;
+    }
+
+    .weather-message {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .weather-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+</style>

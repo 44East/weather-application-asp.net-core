@@ -1,58 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using WeatherAppWeb.Patterns;
 
 namespace WeatherAppWeb.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        private readonly WeatherAppInterfaceModel _weatherModel;
-        public IDictionary<DateTime, DailyWeatherPatternModel> Weather { get; set; }
-        public IDictionary<DateTime, HourlyWeatherPatternModel> HourlyWeather { get; set; }
-        public IndexModel(ILogger<IndexModel> logger, WeatherAppInterfaceModel weatherAppInterfaceModel)
+        private readonly WeatherAppInterfaceModel _model;
+        public IndexModel(WeatherAppInterfaceModel model)
         {
-            _logger = logger;
-            _weatherModel = weatherAppInterfaceModel;
-            Weather = new Dictionary<DateTime, DailyWeatherPatternModel>();
-            HourlyWeather = new Dictionary<DateTime, HourlyWeatherPatternModel>();
+            _model = model;
         }
-
         public void OnGet()
         {
-            
         }
-        /// <summary>
-        /// Handles the HTTP POST request to retrieve weather data for a given city and forecast type.
-        /// If cityName is null, returns the page without performing any action.
-        /// If typeForecast is "5Day", retrieves the five-day weather forecast for the given city using the injected _weatherModel object.
-        /// If typeForecast is "12Hour", retrieves the half-day weather forecast for the given city using the injected _weatherModel object.
-        /// </summary>
-        /// <param name="cityName">The name of the city for which weather data is requested.</param>
-        /// <param name="typeForecast">The type of forecast to retrieve ("5Day" or "12Hour").</param>
-        /// <returns>The page with the retrieved weather data.</returns>
-        public async Task<IActionResult> OnPost(string cityName, string typeForecast)
+        public async Task<IActionResult> OnPostAsync(string forecastType, string cityName)
         {
-            if(cityName == null)
-                return Page();
-            if (typeForecast.Equals("5Day"))
+            if(!string.IsNullOrEmpty(cityName))
             {
-                Weather = await _weatherModel.GetFiveDaysWeatherAsync(cityName);
-                typeForecast = string.Empty;
-            }
-            if (typeForecast.Equals("12Hour"))
-            {
-                HourlyWeather = await _weatherModel.GetHalfDaysWeatherAsync(cityName);
-                typeForecast = string.Empty;
+                _model.CurrentCity = await _model.FindTheCityAsync(cityName);
+                if (_model.CurrentCity != null)
+                {
+                    switch(forecastType)
+                    {
+                        case "Day":
+                            return RedirectToPage("/DailyForecast/Index");
+                        case "Hour":
+                            return RedirectToPage("/HourlyForecast/Index");
+                        default:
+                              return Page();
+                    }
+                }
+                else
+                {
+                    return Page();
+                }
             }
             return Page();
-
         }
-        
-        
     }
 }

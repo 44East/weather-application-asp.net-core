@@ -39,14 +39,14 @@ namespace WeatherAppWeb.Patterns
             TotalPrecipitationLiquid = forecast.HasPrecipitation ? GetTheTotalLiquid(forecast) : 0;
             TypeOfPrecipitationPropability = GetTypeOfPrecipitationPropability(forecast);
             /*--------------------------------------------------------------------- Sun */
-            TimeOfNow = forecast.IsDaylight ? "day" : "night";
+            TimeOfNow = forecast.IsDaylight ? "Day" : "Night";
             IsDayLight = forecast.IsDaylight;
             UVIndex = forecast.UVIndex;
             UVIndexText = forecast.UVIndexText;
             SolarIrradiance = forecast.SolarIrradiance.Value;
             SolarIrradianceUnit = forecast.SolarIrradiance.Unit;
             /*---------------------------------------------------------------------*/
-
+            Humidity = forecast.RelativeHumidity;
             ForecastMessage = forecast.IconPhrase;
             WeatherIcon = forecast.WeatherIcon.ToString() + ".png";
         }
@@ -257,8 +257,10 @@ namespace WeatherAppWeb.Patterns
         public string SolarIrradianceUnit { get; set; }
         #endregion
 
-
-
+        /// <summary>
+        /// The Relative Humidity in the percent value
+        /// </summary>
+        public int Humidity { get; set; }
         /// <summary>
         /// The forecast message with the weather review.
         /// </summary>
