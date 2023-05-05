@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate;
+using WeatherApp.Data.WeatherDataTemplate.DailyDetaiedTemplate;
 using System.Text.Json;
 
 
@@ -20,8 +21,7 @@ namespace WeatherApp
         }
         /// <summary>
         /// This method requests an API key to access the server and the unique number of a saved city. If the pair (key/number) is accepted by the server,
-        /// the method retrieves the weather for 5 days for the selected city.
-        /// If the city list is empty or the API key is unavailable, a corresponding message is output for each event, and the method exits.
+        /// This method retrieves the weather for 5 days for the specified city.
         /// </summary>
         /// <param name="cityInfo">The basic information for the city to retrieve the weather for</param>
         /// <param name="apiKey">The API key to use for the request</param>
@@ -32,7 +32,7 @@ namespace WeatherApp
             try
             {
 
-                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));//HttpWorker.GetStringFromServerAsync(string.Format(textMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetFiveDaysWeatherUrl, cityInfo.Key, apiKey));
 
                 return JsonSerializer.Deserialize<DailyRootWeather>(receivedWeatherForCurrentCity);
             }
@@ -62,20 +62,21 @@ namespace WeatherApp
             
         }
         /// <summary>
-        /// This method requests an API key to access the server and the unique number of a saved city. If the pair (key/number) is accepted by the server
-        /// this method retrieves the hourly weather forecast for the selected city for the next 12 hours
+        /// This method requests an API key to access the server and the unique number of a saved city. If the pair (key/number) is accepted by the server,
+        /// This method retrieves the detailed weather for 5 days for the specified city.
         /// </summary>
         /// <param name="cityInfo">The basic information for the city to retrieve the weather for</param>
         /// <param name="apiKey">The API key to use for the request</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="HourlyForecast"/> objects containing the hourly weather data for the selected city for the next 12 hours</returns>
-        public async Task<IEnumerable<HourlyForecast>> GetHalfDayWeatherAsync(RootBasicCityInfo cityInfo, string apiKey)
+        /// <returns>A <see cref="RootDailyDetailedWeather"/> object containing the weather data for the selected city</returns>
+        public async Task<RootDailyDetailedWeather> GetDetailedWeatherForFiveDaysAsync(RootBasicCityInfo cityInfo, string apiKey)
         {
             string receivedWeatherForCurrentCity;
             try
             {
-                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetHalfDayWeatherUrl, cityInfo.Key, apiKey));
 
-                return JsonSerializer.Deserialize<IEnumerable<HourlyForecast>>(receivedWeatherForCurrentCity);
+                receivedWeatherForCurrentCity = await _httpClient.GetStringAsync(string.Format(TextMessages.GetFiveDaysDetailedWeatherUrl, cityInfo.Key, apiKey));
+
+                return JsonSerializer.Deserialize<RootDailyDetailedWeather>(receivedWeatherForCurrentCity);
             }
             catch (ArgumentNullException ex)
             {
@@ -100,10 +101,11 @@ namespace WeatherApp
                 await Console.Out.WriteLineAsync(ex.Message);
                 throw;
             }
+
         }
         /// <summary>
         /// This method requests an API key to access the server and the unique number of a saved city. If the pair (key/number) is accepted by the server
-        /// this method retrieves the detailed hourly weather forecast for the selected city for the next 12 hours
+        /// this method retrieves the detailed weather forecast for the selected city for the next 12 hours
         /// </summary>
         /// <param name="cityInfo">The basic information for the city to retrieve the weather for</param>
         /// <param name="apiKey">The API key to use for the request</param>

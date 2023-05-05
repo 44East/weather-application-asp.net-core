@@ -1,6 +1,4 @@
-﻿
-
-namespace WeatherApp
+﻿namespace WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate
 {
     /// <summary>
     /// The full weather forecast template for the hourly forecasts.

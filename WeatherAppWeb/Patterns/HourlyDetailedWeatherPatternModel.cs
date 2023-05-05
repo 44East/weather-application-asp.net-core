@@ -1,4 +1,5 @@
 ﻿using WeatherApp;
+using WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate;
 
 namespace WeatherAppWeb.Patterns
 {
@@ -27,10 +28,9 @@ namespace WeatherAppWeb.Patterns
             TempratureFeelings = forecast.RealFeelTemperature.Phrase;
             //RealFeelTemperature = forecast.RealFeelTemperatureShade.Value; 
             /*--------------------------------------------------------------------- Wind */
-            WindSpeed = forecast.Wind.Speed.Value;
-            WindUnitOfMeasure = forecast.Wind.Speed.Unit;
+            WindSpeed = GetTheWindMetresSpeed(forecast);
             WindDirection = GetTheWindDirection(forecast.Wind.Direction.English);
-            WindGustSpeed = forecast.WindGust.Speed.Value;
+            WindGustSpeed = GetTheWindGustsMetresSpeed(forecast);
             /*--------------------------------------------------------------------- Precepitation */
             HasPrecipitation = forecast.HasPrecipitation;
             PrecipitationProbability = forecast.PrecipitationProbability;
@@ -99,6 +99,10 @@ namespace WeatherAppWeb.Patterns
         /// </summary>
         public string WindUnitOfMeasure { get; set; }
         /// <summary>
+        /// The unit of measurement
+        /// </summary>
+        public string WindGustsUnitOfMeasure { get; set; }
+        /// <summary>
         /// The direction of the wind, it contains the full name of the direction.
         /// </summary>
         public string WindDirection { get; init; }
@@ -147,6 +151,33 @@ namespace WeatherAppWeb.Patterns
                     return "Calm";
             }
         }
+        private double GetTheWindMetresSpeed(HourlyDetailedForecast forecast)
+        {
+            if (forecast.Wind.Speed.UnitType == 7)//Unit type [7] it's kilometers per hour 
+            {
+                WindUnitOfMeasure = "m/s";
+                return Math.Round((forecast.Wind.Speed.Value / 3.6), 2);// Kilometers per hour (Km/h) to meters per seconds(m/s) = 1 (km/h) / 3.6 = m/s
+            }
+            else
+            {
+                WindUnitOfMeasure = forecast.Wind.Speed.Unit;
+                return forecast.Wind.Speed.Value;
+            }
+        }
+        private double GetTheWindGustsMetresSpeed(HourlyDetailedForecast forecast)
+        {
+            if (forecast.Wind.Speed.UnitType == 7)//Unit type [7] it's kilometers per hour 
+            {
+                WindGustsUnitOfMeasure = "m/s";
+                return Math.Round((forecast.WindGust.Speed.Value / 3.6), 2);// Kilometers per hour (Km/h) to meters per seconds(m/s) = 1 (km/h) / 3.6 = m/s
+            }
+            else
+            {
+                WindGustsUnitOfMeasure = forecast.WindGust.Speed.Unit;
+                return forecast.WindGust.Speed.Value;
+            }
+        }
+
         /// <summary>
         /// The wind gusts speed in the specified value.
         /// </summary>

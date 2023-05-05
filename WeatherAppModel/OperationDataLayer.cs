@@ -1,4 +1,6 @@
-﻿
+﻿using WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate;
+using WeatherApp.Data.WeatherDataTemplate.DailyDetaiedTemplate;
+
 namespace WeatherApp
 {
     /// <summary>
@@ -97,14 +99,14 @@ namespace WeatherApp
             return await _receiverWeather.GetWeatherForFiveDaysAsync(cityInfo, _primaryApiKey);
         }
         /// <summary>
-        /// Retrieves the hourly forecast for the next 12 hours for a given city using the currently selected API key.
+        /// Gets the detailed weather for next five days for the specified city asynchronously. 
         /// </summary>
-        /// <param name="cityInfo">The basic information of the city to retrieve the forecast for.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="HourlyForecast"/> objects representing the hourly forecast for the next 12 hours.</returns>
-        public async Task<IEnumerable<HourlyForecast>> GetHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
+        /// <param name="cityInfo">The city information to get the weather for.</param>
+        /// <returns>The <see cref="RootDailyDetailedWeather"/> with the weather collection for the specified city.</returns>
+        public async Task<RootDailyDetailedWeather> GetDetailedWeatherForFiveDaysAsync(RootBasicCityInfo cityInfo)
         {
             await EnsureInitializeApiDataAsync();
-            return await _receiverWeather.GetHalfDayWeatherAsync(cityInfo, _primaryApiKey);
+            return await _receiverWeather.GetDetailedWeatherForFiveDaysAsync(cityInfo, _primaryApiKey);
         }
         /// <summary>
         /// Retrieves the detailed hourly forecast for the next 12 hours for a given city using the currently selected API key.

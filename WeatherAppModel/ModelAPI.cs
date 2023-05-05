@@ -1,4 +1,5 @@
-﻿
+﻿using WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate;
+using WeatherApp.Data.WeatherDataTemplate.DailyDetaiedTemplate;
 
 namespace WeatherApp
 {
@@ -38,13 +39,13 @@ namespace WeatherApp
             return await _operationDAL.GetWeatherForCityAsync(cityInfo);
         }
         /// <summary>
-        /// Retrieves the half-day weather forecast for a city.
+        /// Gets the detailed weather for next five days for the specified city asynchronously. 
         /// </summary>
-        /// <param name="cityInfo">The basic information for the city.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="HourlyForecast"/> objects representing the weather forecast.</returns>
-        public async Task<IEnumerable<HourlyForecast>>GetHalfDayWeatherAsync(RootBasicCityInfo cityInfo)
+        /// <param name="cityInfo">The city information to get the weather for.</param>
+        /// <returns>The <see cref="RootDailyDetailedWeather"/> with the weather collection for the specified city.</returns>
+        public async Task<RootDailyDetailedWeather> GetDetailedWeatherForFiveDaysAsync(RootBasicCityInfo cityInfo)
         {
-            return await _operationDAL.GetHalfDayWeatherAsync(cityInfo);
+            return await _operationDAL.GetDetailedWeatherForFiveDaysAsync(cityInfo);
         }
         /// <summary>
         /// Retrieves the detailed half-day weather forecast for a city.

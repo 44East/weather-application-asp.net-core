@@ -1,6 +1,4 @@
-﻿
-
-namespace WeatherApp
+﻿namespace WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate
 {
     public record Evapotranspiration
     (

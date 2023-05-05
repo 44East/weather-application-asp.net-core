@@ -1,4 +1,4 @@
-﻿namespace WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate
+﻿namespace WeatherApp.Data.WeatherDataTemplate.DailyDetaiedTemplate
 {
     public record Snow
     (

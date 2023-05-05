@@ -31,6 +31,11 @@ namespace WeatherApp
         ///</summary>
         public static string GetFiveDaysWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{0}?apikey={1}&language=en&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
         ///<summary>
+        ///URL for displaying detailed weather for a specific city for 5 days.
+        ///Formating - {0} = CurrentCity.Key, {1} = apiKey
+        ///</summary>
+        public static string GetFiveDaysDetailedWeatherUrl { get; } = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/{0}?apikey={1}&language=en&details=true&metric=true"; //{0} = CurrentCity.Key, {1} = apiKey
+        ///<summary>
         ///URL for displaying weather for a specific city for half a day.
         ///Formating - {0} = CurrentCity.Key, {1} = apiKey
         ///</summary>

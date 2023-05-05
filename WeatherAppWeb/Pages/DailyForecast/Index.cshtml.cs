@@ -7,7 +7,7 @@ namespace WeatherAppWeb.Pages.DailyForecast
     {
 
         private readonly WeatherAppInterfaceModel _model;
-        public IDictionary<DateTime, DailyWeatherPatternModel> DailyWeather { get; set; }
+        public IDictionary<DateTime, DailyDetailedWeatherPatternModel> DailyWeather { get; set; }
         public IndexModel(ILogger<IndexModel> logger, WeatherAppInterfaceModel weatherAppInterfaceModel)
         {
             _model = weatherAppInterfaceModel;
@@ -17,7 +17,7 @@ namespace WeatherAppWeb.Pages.DailyForecast
         {
             if (_model.CurrentCity != null)
             {
-                _model.DailyForecast = await _model.GetFiveDaysWeatherAsync(_model.CurrentCity);
+                _model.DailyForecast = await _model.GetFiveDaysDetailedWeatherAsync(_model.CurrentCity);
                 DailyWeather = _model.DailyForecast;
             }
         }

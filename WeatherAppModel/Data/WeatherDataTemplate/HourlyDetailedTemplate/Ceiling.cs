@@ -1,6 +1,6 @@
-﻿
+﻿using WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate;
 
-namespace WeatherApp
+namespace WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate
 {
     public record Ceiling
     (

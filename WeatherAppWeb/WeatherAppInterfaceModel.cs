@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.FileSystemGlobbing.Internal;
+﻿using WeatherApp.Data.WeatherDataTemplate.HourlyDetailedTemplate;
+using WeatherApp.Data.WeatherDataTemplate.DailyDetaiedTemplate;
 using WeatherApp;
 using WeatherAppWeb.Patterns;
 
@@ -36,7 +37,7 @@ namespace WeatherAppWeb
         /// <summary>
         /// A Key value pairs for the daily weather
         /// </summary>
-        public IDictionary<DateTime, DailyWeatherPatternModel> DailyForecast { get; set; }
+        public IDictionary<DateTime, DailyDetailedWeatherPatternModel> DailyForecast { get; set; }
         /// <summary>
         /// The current instance of the seraching cities
         /// </summary>
@@ -62,23 +63,23 @@ namespace WeatherAppWeb
             }
         }
         /// <summary>
-        /// Gets the weather forecast for the next five days for the specified city.
+        /// Gets the deatailed weather forecast for the next five days for the specified city.
         /// </summary>
         /// <param name="cityName">The name of the city for which to retrieve the weather forecast.</param>
-        /// <returns>A <see cref="IDictionary{TKey, TValue}"/> containing <see cref="DailyWeatherPatternModel"/>  for each day.</returns>
-        public async Task<IDictionary<DateTime, DailyWeatherPatternModel>> GetFiveDaysWeatherAsync(RootBasicCityInfo currentCity)
+        /// <returns>A <see cref="IDictionary{TKey, TValue}"/> containing <see cref="DailyDetailedWeatherPatternModel"/>  for each day.</returns>
+        public async Task<IDictionary<DateTime, DailyDetailedWeatherPatternModel>> GetFiveDaysDetailedWeatherAsync(RootBasicCityInfo currentCity)
         {
-          
+
 
             // This collection will be contains all weather data fields received from the server.
-            IList<DailyForecast> rawWeather;
+            IList<DetailedDailyForecast> rawWeather;
 
             // This dictionary will be contains the weather data for each day according to the weather pattern.
-            IDictionary<DateTime, DailyWeatherPatternModel> weatherResult = new Dictionary<DateTime, DailyWeatherPatternModel>();
+            IDictionary<DateTime, DailyDetailedWeatherPatternModel> weatherResult = new Dictionary<DateTime, DailyDetailedWeatherPatternModel>();
             try
             {
                 // Get all the weather data for the specified city.
-                rawWeather = (await _modelAPI.GetWeatherForCityAsync(currentCity)).DailyForecasts;
+                rawWeather = (await _modelAPI.GetDetailedWeatherForFiveDaysAsync(currentCity)).DailyForecasts;
             }
             catch (Exception ex)
             {
@@ -89,11 +90,11 @@ namespace WeatherAppWeb
             // Insert the relevant data in the dictionary from the raw weather collection.
             foreach (var item in rawWeather)
             {
-                weatherResult.Add(item.Date, new DailyWeatherPatternModel(item, currentCity));
+                weatherResult.Add(item.Date, new DailyDetailedWeatherPatternModel(item, currentCity));
             }
             return weatherResult;
         }
-        
+
         /// <summary>
         /// Gets the detailed weather forecast for the next 12 hours for the specified city.
         /// </summary>
