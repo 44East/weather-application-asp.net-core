@@ -156,7 +156,7 @@ namespace WeatherAppWeb.Patterns
             if (forecast.Wind.Speed.UnitType == 7)//Unit type [7] it's kilometers per hour 
             {
                 WindUnitOfMeasure = "m/s";
-                return Math.Round((forecast.Wind.Speed.Value / 3.6), 2);// Kilometers per hour (Km/h) to meters per seconds(m/s) = 1 (km/h) / 3.6 = m/s
+                return Math.Round((forecast.Wind.Speed.Value / 3.6), 1);// Kilometers per hour (Km/h) to meters per seconds(m/s) = 1 (km/h) / 3.6 = m/s
             }
             else
             {
@@ -169,7 +169,7 @@ namespace WeatherAppWeb.Patterns
             if (forecast.Wind.Speed.UnitType == 7)//Unit type [7] it's kilometers per hour 
             {
                 WindGustsUnitOfMeasure = "m/s";
-                return Math.Round((forecast.WindGust.Speed.Value / 3.6), 2);// Kilometers per hour (Km/h) to meters per seconds(m/s) = 1 (km/h) / 3.6 = m/s
+                return Math.Round((forecast.WindGust.Speed.Value / 3.6), 1);// Kilometers per hour (Km/h) to meters per seconds(m/s) = 1 (km/h) / 3.6 = m/s
             }
             else
             {

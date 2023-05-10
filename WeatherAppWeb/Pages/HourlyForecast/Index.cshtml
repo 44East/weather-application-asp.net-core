@@ -4,55 +4,63 @@
 }
 
 <div class="container">
-    <h2>@Model.HourlyForecast.Values.First().CityName, @Model.HourlyForecast.Values.First().CountryName</h2>
-
-    @foreach (var item in Model.HourlyForecast)
+    @if (Model.HourlyForecast.Count() > 0)
     {
-        <div class="hourly-forecast">
-            <div class="forecast-header">
-                <h3>@item.Key.ToShortTimeString() </h3>
-                <h3>Temperature : @item.Value.Temperature @item.Value.TemperatureUnit</h3>
-                <p>Feels like @item.Value.RealFeelTemperature @item.Value.TemperatureUnit (@item.Value.TempratureFeelings)</p>
-            </div>
+        <h2>@Model.HourlyForecast.Values.First().CityName, @Model.HourlyForecast.Values.First().CountryName</h2>
 
-            <div class="forecast-details">
-                <div class="details-block">
-                    <h4>Wind</h4>
-                    <div class="wind">
-                        @item.Value.WindSpeed @item.Value.WindUnitOfMeasure @item.Value.WindDirection <br>
-                        Gusts up to @item.Value.WindGustSpeed @item.Value.WindGustsUnitOfMeasure
+        @foreach (var item in Model.HourlyForecast)
+        {
+            <div class="hourly-forecast">
+                <div class="forecast-header">
+                    <h3>@item.Key.ToShortTimeString() </h3>
+                    <h3>Temperature : @item.Value.Temperature @item.Value.TemperatureUnit</h3>
+                    <p>Feels like @item.Value.RealFeelTemperature @item.Value.TemperatureUnit (@item.Value.TempratureFeelings)</p>
+                </div>
+
+                <div class="forecast-details">
+                    <div class="details-block">
+                        <h4>Wind</h4>
+                        <div class="wind">
+                            @item.Value.WindSpeed @item.Value.WindUnitOfMeasure @item.Value.WindDirection <br>
+                            Gusts up to @item.Value.WindGustSpeed @item.Value.WindGustsUnitOfMeasure
+                        </div>
+                    </div>
+
+                    <div class="details-block">
+                        <h4>Precipitation</h4>
+                        @if (item.Value.HasPrecipitation)
+                        {
+                            <p>@item.Value.PrecipitationProbability% chance of @item.Value.PrecipitationType, total liquid: @item.Value.TotalPrecipitationLiquid</p>
+                        }
+                        else
+                        {
+                            <p>No precipitation</p>
+                        }
+                    </div>
+
+                    <div class="details-block">
+                        <h4>Humidity</h4>
+                        <p>@item.Value.Humidity%</p>
+                    </div>
+
+                    <div class="details-block">
+                        @if (item.Value.IsDayLight)
+                        {
+                            <h4>Sun</h4>
+                            <p>UV Index: @item.Value.UVIndex (@item.Value.UVIndexText)</p>
+                        }
                     </div>
                 </div>
 
-                <div class="details-block">
-                    <h4>Precipitation</h4>
-                    @if (item.Value.HasPrecipitation)
-                    {
-                        <p>@item.Value.PrecipitationProbability% chance of @item.Value.PrecipitationType, total liquid: @item.Value.TotalPrecipitationLiquid</p>
-                    }
-                    else
-                    {
-                        <p>No precipitation</p>
-                    }
-                </div>
-
-                <div class="details-block">
-                    <h4>Humidity</h4>
-                    <p>@item.Value.Humidity%</p>
-                </div>
-                
-                <div class="details-block">
-                    @if (item.Value.IsDayLight)
-                    {
-                        <h4>Sun</h4>
-                        <p>UV Index: @item.Value.UVIndex (@item.Value.UVIndexText)</p>
-                    }
-                </div>
+                <p class="forecast-message">@item.Value.ForecastMessage</p>
+                <img src="~/images/forecast_view/@item.Value.WeatherIcon" alt="@item.Value.ForecastMessage" />
             </div>
+        }
 
-            <p class="forecast-message">@item.Value.ForecastMessage</p>
-            <img src="~/images/forecast_view/@item.Value.WeatherIcon" alt="@item.Value.ForecastMessage" />
-        </div>
+    }
+    else
+    {
+        <h3>Weather doesn't find</h3>
     }
 </div>
 

@@ -15,8 +15,11 @@ namespace WeatherAppWeb.Pages.HourlyForecast
         public async Task OnGetAsync()
         {
             if(_model.CurrentCity != null) 
-            { 
-                _model.HourlyForecast = await _model.GetHalfDaysDetailedWeatherAsync(_model.CurrentCity);
+            {
+                if (_model.HourlyForecast == null)
+                {
+                    HourlyForecast = await _model.GetHalfDaysDetailedWeatherAsync(_model.CurrentCity);
+                }
                 HourlyForecast = _model.HourlyForecast;
             }
         }

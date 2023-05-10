@@ -69,7 +69,11 @@ namespace WeatherAppWeb
         /// <returns>A <see cref="IDictionary{TKey, TValue}"/> containing <see cref="DailyDetailedWeatherPatternModel"/>  for each day.</returns>
         public async Task<IDictionary<DateTime, DailyDetailedWeatherPatternModel>> GetFiveDaysDetailedWeatherAsync(RootBasicCityInfo currentCity)
         {
-
+            //Checking the current city for existing 
+            if (CurrentCity == null)
+            {
+                return new Dictionary<DateTime, DailyDetailedWeatherPatternModel>();
+            }
 
             // This collection will be contains all weather data fields received from the server.
             IList<DetailedDailyForecast> rawWeather;
@@ -92,6 +96,8 @@ namespace WeatherAppWeb
             {
                 weatherResult.Add(item.Date, new DailyDetailedWeatherPatternModel(item, currentCity));
             }
+            //Set the current weather into key vale pairs collection to minimize calls to the server
+            DailyForecast = weatherResult;
             return weatherResult;
         }
 
@@ -102,6 +108,11 @@ namespace WeatherAppWeb
         /// <returns>A <see cref="IDictionary{TKey, TValue}"/> containing <see cref="HourlyDetailedWeatherPatternModel"/>  for each day.</returns>
         public async Task<IDictionary<DateTime, HourlyDetailedWeatherPatternModel>> GetHalfDaysDetailedWeatherAsync(RootBasicCityInfo currentCity)
         {
+            //Checking the current city for existing 
+            if (CurrentCity == null)
+            {
+                return new Dictionary<DateTime, HourlyDetailedWeatherPatternModel>();
+            }
 
             // This collection will be contains all weather data fields received from the server.
             IEnumerable<HourlyDetailedForecast> rawWeather;
@@ -124,6 +135,8 @@ namespace WeatherAppWeb
             {
                 weatherResult.Add(item.DateTime, new HourlyDetailedWeatherPatternModel(item, currentCity));
             }
+            //Set the current weather into key vale pairs collection to minimize calls to the server
+            HourlyForecast = weatherResult;
             return weatherResult;
         }
         /// <summary>

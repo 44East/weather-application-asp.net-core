@@ -17,7 +17,10 @@ namespace WeatherAppWeb.Pages.DailyForecast
         {
             if (_model.CurrentCity != null)
             {
-                _model.DailyForecast = await _model.GetFiveDaysDetailedWeatherAsync(_model.CurrentCity);
+                if (_model.DailyForecast == null)
+                {
+                    DailyWeather = await _model.GetFiveDaysDetailedWeatherAsync(_model.CurrentCity);
+                }
                 DailyWeather = _model.DailyForecast;
             }
         }
